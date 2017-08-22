@@ -5,7 +5,8 @@ package comp1110.ass2.gui;
  */
 public class Pieces {
 /*eight object
-each oobject have eight state
+each oobject have eight state 64 state
+
 */
 
 }
