@@ -38,6 +38,11 @@ public class Viewer extends Application {
      *
      * @param placement  A valid placement string
      */
+
+    /* if the pieces were placed on the board , then remove the
+    positon in the map, and put the pieces on the other cells.(may can create a
+    new board)
+     */
     void makePlacement(String placement) {
         // FIXME Task 4: implement the simple placement viewer
     }
