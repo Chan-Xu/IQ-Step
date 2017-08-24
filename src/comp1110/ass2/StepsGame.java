@@ -21,23 +21,50 @@ public class StepsGame {
      * @return True if the piece placement is well-formed
      */
     static boolean isPiecePlacementWellFormed(String piecePlacement) {
-        // FIXME Task 2: determine whether a piece placement is well-formed
-        return false;
+
+        char f = piecePlacement.charAt(0);
+        if (f < 'A' || f > 'H') {
+            return false;
+        }
+        char s = piecePlacement.charAt(1);
+        if (s < 'A' || s > 'H') {
+            return false;
+        }
+        char t = piecePlacement.charAt(2);
+        if (t < 'A' || t > 'Y' && t < 'a' || t > 'y') {
+            return false;
+        }
+        return true;
     }
 
     /**
      * Determine whether a placement string is well-formed:
-     *  - it consists of exactly N three-character piece placements (where N = 1 .. 8);
-     *  - each piece placement is well-formed
-     *  - no shape appears more than once in the placement
+     * - it consists of exactly N three-character piece placements (where N = 1 .. 8);
+     * - each piece placement is well-formed
+     * - no shape appears more than once in the placement
      *
      * @param placement A string describing a placement of one or more pieces
      * @return True if the placement is well-formed
      */
     static boolean isPlacementWellFormed(String placement) {
-        // FIXME Task 3: determine whether a placement is well-formed
-        return false;
+        if (placement.length() / 3 != 0 || placement.length() > 24) {
+            return false;
+        } else if (placement.length() / 3 == 0 || placement.length() < 24) {
+            for (int i = 0; i < placement.length(); i += 3) {
+                String a = placement.substring(i, i + 2);
+                if (isPiecePlacementWellFormed(a) == true) {
+                    return true;
+                } else return false;
+            }
+        }return true;
     }
+
+
+
+
+
+
+
 
     /**
      * Determine whether a placement sequence is valid.  To be valid, the placement
@@ -48,6 +75,12 @@ public class StepsGame {
      * @return True if the placement sequence is valid
      */
     static boolean isPlacementSequenceValid(String placement) {
+
+        // placement.length = 24
+        // first number comes from the  collection
+        //the first character is in the range A .. H
+        //the second character is in the range A .. H ,collected by the array.
+        //the third character is in the range A .. Y and a .. y
         // FIXME Task 5: determine whether a placement sequence is valid
         return false;
     }
@@ -64,6 +97,8 @@ public class StepsGame {
      * @return An set of viable piece placements
      */
     static Set<String> getViablePiecePlacements(String placement, String objective) {
+        //the placement of the objects cant be overlapped .
+
         // FIXME Task 6: determine the correct order of piece placements
         return null;
     }
