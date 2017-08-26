@@ -78,17 +78,15 @@ public class StepsGame {
 
 // write a new method to check whether they are duplicate
     static boolean NoDuplicate (String placement) {
-        for (int i = 0; i < placement.length() / 3; i += 3) {
-            for (int k = 0; k < placement.length() / 3; k += 3) {
-                if (i!=k && placement.charAt(i) == (placement.charAt(k))) {
-                    return false;
-                }
-//                    return true;
+        boolean Duplicate = true;
+        char [] b = placement.toCharArray();
+        for (int i = 0; i < b.length ; i += 3)
+            for (int k = 0; k < b.length ; k += 3)
+                if (i!=k && b[i]==b[k])
+                    Duplicate = false;
 
-            }
 
-        }
-        return true;
+            return Duplicate;
     }
 
 
