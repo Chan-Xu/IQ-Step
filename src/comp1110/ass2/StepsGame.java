@@ -68,14 +68,6 @@ public class StepsGame {
         return false;
     }
 
-//            for (int m = 0; m < a.length; m++){
-//
-//                }
-//            }
-//            return false;
-
-
-
 // write a new method to check whether they are duplicate
     static boolean NoDuplicate (String placement) {
         boolean Duplicate = true;
@@ -84,8 +76,6 @@ public class StepsGame {
             for (int k = 0; k < b.length ; k += 3)
                 if (i!=k && b[i]==b[k])
                     Duplicate = false;
-
-
             return Duplicate;
     }
 
