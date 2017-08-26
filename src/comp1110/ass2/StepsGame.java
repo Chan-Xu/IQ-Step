@@ -47,23 +47,48 @@ public class StepsGame {
      */
     static boolean isPlacementWellFormed(String placement) {
         // FIXME Task 3: determine whether a placement is well-formed
-        if (placement == null || placement.equals("")){
+        if (placement == null || placement.equals("")) {
             return false;
-        }else if (placement.length()%3 != 0){
+        } else if (placement.length() % 3 != 0) {
             return false;
-        }else {
-            String[] a = new String[placement.length()/3];
+        } else {
+            String[] a = new String[placement.length() / 3];
 
-            for (int i = 0; i < placement.length()/3; i++){
-                a[i] = placement.substring(3*i,3*i+3);
-            }
-
-            for (int m = 0; m < a.length; m++){
+            for (int i = 0; i < placement.length() / 3; i++) {
+                a[i] = placement.substring(3 * i, 3 * i + 3);
+                if (isPiecePlacementWellFormed(a[i])&& NoDuplicate(placement)) {
+                    return true;
 
                 }
-            }
-            return false;
 
+                }
+
+            }
+
+        return false;
+    }
+
+//            for (int m = 0; m < a.length; m++){
+//
+//                }
+//            }
+//            return false;
+
+
+
+// write a new method to check whether they are duplicate
+    static boolean NoDuplicate (String placement) {
+        for (int i = 0; i < placement.length() / 3; i += 3) {
+            for (int k = 0; k < placement.length() / 3; k += 3) {
+                if (i!=k && placement.charAt(i) == (placement.charAt(k))) {
+                    return false;
+                }
+//                    return true;
+
+            }
+
+        }
+        return true;
     }
 
 
