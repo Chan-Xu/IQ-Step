@@ -22,8 +22,19 @@ public class StepsGame {
      */
     static boolean isPiecePlacementWellFormed(String piecePlacement) {
         // FIXME Task 2: determine whether a piece placement is well-forme
-        return false;
+        //Check if it consists of exactly three characters
+        if (piecePlacement.length() == 3) {
+
+            char[] placementChar = piecePlacement.toCharArray();
+            if(placementChar[0] >= 'A' && placementChar[0] <= 'H'){                    //Check the first char
+                if(placementChar[1] >= 'A' && placementChar[1] <= 'H'){                //Check the second char
+                    return ((placementChar[2] >= 'A' && placementChar[2] <= 'Y') ||    //Check the third char
+                            (placementChar[2] >= 'a' && placementChar[2] <= 'y'));
+                }
+            }
+        } return false;
     }
+
 
     /**
      * Determine whether a placement string is well-formed:
@@ -36,8 +47,25 @@ public class StepsGame {
      */
     static boolean isPlacementWellFormed(String placement) {
         // FIXME Task 3: determine whether a placement is well-formed
-        return false;
+        if (placement == null || placement.equals("")){
+            return false;
+        }else if (placement.length()%3 != 0){
+            return false;
+        }else {
+            String[] a = new String[placement.length()/3];
+
+            for (int i = 0; i < placement.length()/3; i++){
+                a[i] = placement.substring(3*i,3*i+3);
+            }
+
+            for (int m = 0; m < a.length; m++){
+
+                }
+            }
+            return false;
+
     }
+
 
     /**
      * Determine whether a placement sequence is valid.  To be valid, the placement
