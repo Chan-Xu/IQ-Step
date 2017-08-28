@@ -8,6 +8,8 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 
@@ -38,13 +40,14 @@ public class Viewer extends Application {
      *
      * @param placement  A valid placement string
      */
-
-    /* if the pieces were placed on the board , then remove the
-    positon in the map, and put the pieces on the other cells.(may can create a
-    new board)
-     */
     void makePlacement(String placement) {
         // FIXME Task 4: implement the simple placement viewer
+    if(textField.getCharacters().equals(placement)){
+        Image image = new Image(placement);
+        ImageView imageView= new ImageView(image);
+        root.getChildren().add(imageView);
+    }
+
     }
 
 
