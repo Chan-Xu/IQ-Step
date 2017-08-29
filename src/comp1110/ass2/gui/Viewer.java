@@ -42,13 +42,16 @@ public class Viewer extends Application {
      */
     void makePlacement(String placement) {
         // FIXME Task 4: implement the simple placement viewer
-    if(textField.getCharacters().equals(placement)){
-        Image image = new Image(placement);
+        Image image = new Image("gui/assets placement");
         ImageView imageView= new ImageView(image);
-        root.getChildren().add(imageView);
-    }
+        textField.setOnKeyTyped(event -> {
+        if (event.getCharacter().equals(placement))
+        controls.getChildren().add(imageView);
+    }) ;
+
 
     }
+
 
 
     /**
