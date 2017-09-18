@@ -1,5 +1,7 @@
 package comp1110.ass2;
 
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.Set;
 
 /**
@@ -97,22 +99,58 @@ public class StepsGame {
      */
     static boolean isPlacementSequenceValid(String placement) {
         // FIXME Task 5: determine whether a placement sequence is valid
-        return false;
+        if (!isPlacementWellFormed(placement)) {
+            return false;
+        } else {
+            String[] place = new String[placement.length() / 3];
+
+            for (int i = 0; i < placement.length() / 3; i++) {
+                place[i] = placement.substring(3 * i, 3 * i + 3);
+            }
+
+            for (int j = 0; j < place.length; j++) {
+                if (!isValidPieceString(place[j])) {
+                    return false;
+                }
+            }
+
+            ArrayList<Integer> outcome = new ArrayList<>();
+            for (int v = 0; v < place.length; v++) {
+                ArrayList<Integer> list = getCoordinate(place[v]);
+                for (int w = 0; w < list.size(); w++) {
+                    outcome.add(list.get(w));
+                }
+            }
+
+        }
+        return true;
     }
 
-    /**
-     * Given a string describing a placement of pieces and a string describing
-     * an (unordered) objective, return a set of all possible next viable
-     * piece placements.   A viable piece placement must be a piece that is
-     * not already placed (ie not in the placement string), and which will not
-     * obstruct any other unplaced piece.
-     *
-     * @param placement A valid sequence of piece placements where each piece placement is drawn from the objective
-     * @param objective A valid game objective, but not necessarily a valid placement string
-     * @return An set of viable piece placements
-     */
+    static boolean isValidPieceString(String m) {
+        return true;
+    }
+
+    static ArrayList<Integer> getCoordinate(String n){
+        return null;
+    }
+        /**
+         * Given a string describing a placement of pieces and a string describing
+         * an (unordered) objective, return a set of all possible next viable
+         * piece placements.   A viable piece placement must be a piece that is
+         * not already placed (ie not in the placement string), and which will not
+         * obstruct any other unplaced piece.
+         *
+         * @param placement A valid sequence of piece placements where each piece placement is drawn from the objective
+         * @param objective A valid game objective, but not necessarily a valid placement string
+         * @return An set of viable piece placements
+         */
     static Set<String> getViablePiecePlacements(String placement, String objective) {
         // FIXME Task 6: determine the correct order of piece placements
+        /* for no more pieces */
+        if(placement.length() == objective.length()) {
+            return new HashSet<>();
+        }
+
         return null;
     }
 
