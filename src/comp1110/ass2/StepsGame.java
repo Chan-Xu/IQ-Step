@@ -90,13 +90,6 @@ public class StepsGame {
      * @param placement A placement sequence string
      * @return True if the placement sequence is valid
      */
-
-    /* to consider a order when putting the piece on the board
-    the first if the lower ring is next to upper ring ofthe other piece, then put the lower one first.
-    this is the right order. Else it is false.
-
-
-     */
     static boolean isPlacementSequenceValid(String placement) {
         // FIXME Task 5: determine whether a placement sequence is valid
         if (!isPlacementWellFormed(placement)) {
@@ -108,12 +101,14 @@ public class StepsGame {
                 place[i] = placement.substring(3 * i, 3 * i + 3);
             }
 
+            /* check the piece string is valid */
             for (int j = 0; j < place.length; j++) {
                 if (!isValidPieceString(place[j])) {
                     return false;
                 }
             }
 
+            /* form the outcome string */
             ArrayList<Integer> outcome = new ArrayList<>();
             for (int v = 0; v < place.length; v++) {
                 ArrayList<Integer> list = getCoordinate(place[v]);
