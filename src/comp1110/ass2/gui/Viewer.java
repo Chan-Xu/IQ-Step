@@ -8,6 +8,8 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 
@@ -40,7 +42,16 @@ public class Viewer extends Application {
      */
     void makePlacement(String placement) {
         // FIXME Task 4: implement the simple placement viewer
+        Image image = new Image("gui/assets placement");
+        ImageView imageView= new ImageView(image);
+        textField.setOnKeyTyped(event -> {
+        if (event.getCharacter().equals(placement))
+        controls.getChildren().add(imageView);
+    }) ;
+
+
     }
+
 
 
     /**
