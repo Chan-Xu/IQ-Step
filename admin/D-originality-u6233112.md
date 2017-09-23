@@ -3,4 +3,5 @@ I declare that the work I have submitted for Stage D of this assignment and all 
 * The idea of <...> came from a discussion with <...>
 
 * The code in class <...> uses an idea suggested by <...>
+
 Signed: Chan Xu (u6233112);
