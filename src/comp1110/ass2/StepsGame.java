@@ -101,33 +101,69 @@ public class StepsGame {
                 place[i] = placement.substring(3 * i, 3 * i + 3);
             }
 
-            /* check the piece string is valid */
-            for (int j = 0; j < place.length; j++) {
-                if (!isValidPieceString(place[j])) {
+            /* check the pieces are not in the outside of the board. */
+            // check the home rings are not at the corner
+            for (int j = 0; j < place.length; j += 3){
+                if (place[j] == "A" || place[j] == "J" || place[j] == "p" || place[j] == "y" ){
                     return false;
                 }
             }
 
-            /* form the outcome string */
-            ArrayList<Integer> outcome = new ArrayList<>();
-            for (int v = 0; v < place.length; v++) {
-                ArrayList<Integer> list = getCoordinate(place[v]);
-                for (int w = 0; w < list.size(); w++) {
-                    outcome.add(list.get(w));
+            // check the home rings are not at the edge
+            for (int m = 0; m < place.length; m++){
+                if ((!isValidPieceString(place[m]))){
+                    return false;
                 }
             }
+
+            // check the rings without overlap
 
         }
         return true;
     }
 
-    static boolean isValidPieceString(String m) {
-        return true;
+    static boolean isValidPieceString(String c) {
+        // upper edge
+        if (c.charAt(2) >= 'B' && c.charAt(2) <= 'I'){
+            if (c.charAt(0) == 'B' && c.charAt(1) == 'B' || c.charAt(0) == 'B' && c.charAt(1) == 'H' ||
+                    c.charAt(0) == 'E' && c.charAt(1) == 'D' || c.charAt(0) == 'E' && c.charAt(1) == 'F'){
+                return  true;
+            }else{
+                return  false;
+            }
+        }   // right edge
+        else if (c.charAt(2) == 'T' || c.charAt(2) == 'e' || c.charAt(2) == 'o'){
+            if (c.charAt(0) == 'B' && c.charAt(1) == 'C' || c.charAt(0) == 'B' && c.charAt(1) == 'E' ||
+                    c.charAt(0) == 'E' && c.charAt(1) == 'A' || c.charAt(0) == 'E' && c.charAt(1) == 'G'){
+                return  true;
+            }else{
+                return  false;
+            }
+        }   // lower edge
+        else if (c.charAt(2) >= 'q' && c.charAt(2) <= 'x'){
+            if (c.charAt(0) == 'B' && c.charAt(1) == 'D' || c.charAt(0) == 'B' && c.charAt(1) == 'F' ||
+                    c.charAt(0) == 'E' && c.charAt(1) == 'B' || c.charAt(0) == 'E' && c.charAt(1) == 'H'){
+                return  true;
+            }else{
+                return  false;
+            }
+        }   // left edge
+        else if (c.charAt(2) == 'K' || c.charAt(2) == 'U' || c.charAt(2) == 'f'){
+            if (c.charAt(0) == 'B' && c.charAt(1) == 'A' || c.charAt(0) == 'B' && c.charAt(1) == 'G' ||
+                    c.charAt(0) == 'E' && c.charAt(1) == 'C' || c.charAt(0) == 'E' && c.charAt(1) == 'E'){
+                return  true;
+            }else{
+                return  false;
+            }
+        }return  false;
     }
 
+/*
     static ArrayList<Integer> getCoordinate(String n){
         return null;
     }
+    */
+
         /**
          * Given a string describing a placement of pieces and a string describing
          * an (unordered) objective, return a set of all possible next viable
