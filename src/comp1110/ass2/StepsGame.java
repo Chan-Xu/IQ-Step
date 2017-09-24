@@ -1,8 +1,6 @@
 package comp1110.ass2;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
 /**
  * This class provides the text interface for the Steps Game
@@ -104,7 +102,7 @@ public class StepsGame {
             /* check the pieces are not in the outside of the board. */
             // check the home rings are not at the corner
             for (int j = 0; j < place.length; j += 3){
-                if (place[j] == "A" || place[j] == "J" || place[j] == "p" || place[j] == "y" ){
+                if (place[j].charAt(2) == 'A' || place[j].charAt(2) == 'J' || place[j].charAt(2) == 'p' || place[j].charAt(2) == 'y' ){
                     return false;
                 }
             }
@@ -117,10 +115,11 @@ public class StepsGame {
             }
 
             // check the rings without overlap
-
+           
         }
         return true;
     }
+
 
     static boolean isValidPieceString(String c) {
         // upper edge
@@ -155,7 +154,7 @@ public class StepsGame {
             }else{
                 return  false;
             }
-        }return  false;
+        }return  true;
     }
 
 /*
