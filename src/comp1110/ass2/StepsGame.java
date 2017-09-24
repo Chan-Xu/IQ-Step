@@ -93,6 +93,7 @@ public class StepsGame {
         if (!isPlacementWellFormed(placement)) {
             return false;
         } else {
+            // break a string into many pieces
             String[] place = new String[placement.length() / 3];
 
             for (int i = 0; i < placement.length() / 3; i++) {
@@ -107,20 +108,49 @@ public class StepsGame {
                 }
             }
 
-            // check the home rings are not at the edge
+            // check the home rings are not at the edges
             for (int m = 0; m < place.length; m++){
                 if ((!isValidPieceString(place[m]))){
                     return false;
                 }
             }
 
-            // check the rings without overlap
-           
+            /* check the rings without overlap */
+            ArrayList<Integer> result = new ArrayList<>();
+            for (int v = 0; v < place.length; v++){
+                ArrayList<Integer> list = listArray(place[v]);
+                for (int w = 0; w <list.size(); w++){
+                    result.add(list.get(w));
+                }
+            }
+
+            Set<Integer> res = new HashSet<>();
+            for (int u = 0; u < result.size(); u++){
+                res.add(result.get(u));
+            }
+
+            // check the integers are not  repeated
+            if (result.size() != res.size()){
+                return false;
+            }
         }
         return true;
     }
 
+/*
+    // convert char to int
+    static int charToInt(char n) {
+        if (n >= 'A' && n <= 'Y'){
+            return (int)n - 64;
+        }else
+            return (int)n - 71;
+    }
+*/
 
+    /* add a method to determine whether the pieces are valid when home rings on the edges
+     * @param String A piece sequence string
+     * @return True if the piece sequence is valid
+     */
     static boolean isValidPieceString(String c) {
         // upper edge
         if (c.charAt(2) >= 'B' && c.charAt(2) <= 'I'){
@@ -156,6 +186,149 @@ public class StepsGame {
             }
         }return  true;
     }
+
+    static ArrayList<Integer> listArray(String s){
+        Map<Character, Integer> list = new HashMap<>();
+        char[] position = {'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y',
+                'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y'};
+
+        for (int i = 0; i < position.length; i++){
+            list.put(position[i],i);
+        }
+
+        int centre = list.get(s.charAt(2));
+
+        int[] pos = {centre-11, centre-10, centre-9,
+                      centre-1, centre, centre+1,
+                      centre+9, centre+10, centre+11};
+
+        int[][] arrA = {{0, 0, -1},{0, 0, 0}, {0, -1, -1}}; int[][] arrB = {{-1, 0, -1},{-1, 0, 0},{-1, 0, 0}};
+        int[][] arrC = {{-1, 0, -1},{-1, 0, 0},{ 0, 0, -1}}; int[][] arrD = {{-1, 0, -1},{0, 0, -1},{-1, 0, 0}};
+        int[][] arrE = {{-1, 0, -1},{0, 0, -1},{0, 0, -1}}; int[][] arrF = {{-1, -1, 0},{-1, 0, 0},{0, 0, -1}};
+        int[][] arrG = {{-1, 0, 0},{-1, 0, 0},{0, 0, -1}}; int[][] arrH = {{-1, 0, 0}, {0, 0, -1},{-1, 0, 0}};
+
+        boolean a = s.charAt(1) == 'A';
+        boolean b = s.charAt(1) == 'B';
+        boolean c = s.charAt(1) == 'C';
+        boolean d = s.charAt(1) == 'D';
+        boolean e = s.charAt(1) == 'E';
+        boolean f = s.charAt(1) == 'F';
+        boolean g = s.charAt(1) == 'G';
+        boolean h = s.charAt(1) == 'H';
+
+        if (s.charAt(0) == 'A'){
+            if (a) return selection(arrA, pos);
+            else if (b) return selection(rotate(arrA), pos);
+            else if (c) return selection(rotate(rotate(arrA)), pos);
+            else if (d) return selection(rotate(rotate(rotate(arrA))), pos);
+            else if (e) return selection(reverse(arrA), pos);
+            else if (f) return selection(rotate(reverse(arrA)), pos);
+            else if (g) return selection(rotate(rotate(reverse(arrA))), pos);
+            else if (h) return selection(rotate(rotate(rotate(reverse(arrA)))), pos);
+        }else if (s.charAt(0) == 'B'){
+            if (a) return selection(arrB, pos);
+            else if (b) return selection(rotate(arrB), pos);
+            else if (c) return selection(rotate(rotate(arrB)), pos);
+            else if (d) return selection(rotate(rotate(rotate(arrB))), pos);
+            else if (e) return selection(reverse(arrB), pos);
+            else if (f) return selection(rotate(reverse(arrB)), pos);
+            else if (g) return selection(rotate(rotate(reverse(arrB))), pos);
+            else if (h) return selection(rotate(rotate(rotate(reverse(arrB)))), pos);
+        }else if (s.charAt(0) == 'C'){
+            if (a) return selection(arrC, pos);
+            else if (b) return selection(rotate(arrC), pos);
+            else if (c) return selection(rotate(rotate(arrC)), pos);
+            else if (d) return selection(rotate(rotate(rotate(arrC))), pos);
+            else if (e) return selection(reverse(arrC), pos);
+            else if (f) return selection(rotate(reverse(arrC)), pos);
+            else if (g) return selection(rotate(rotate(reverse(arrC))), pos);
+            else if (h) return selection(rotate(rotate(rotate(reverse(arrC)))), pos);
+        }else if (s.charAt(0) == 'D'){
+            if (a) return selection(arrD, pos);
+            else if (b) return selection(rotate(arrD), pos);
+            else if (c) return selection(rotate(rotate(arrD)), pos);
+            else if (d) return selection(rotate(rotate(rotate(arrD))), pos);
+            else if (e) return selection(reverse(arrD),pos);
+            else if (f) return selection(rotate(reverse(arrD)),pos);
+            else if (g) return selection(rotate(rotate(reverse(arrD))), pos);
+            else if (h) return selection(rotate(rotate(rotate(reverse(arrD)))), pos);
+        }else if (s.charAt(0) == 'E'){
+            if (a) return selection(arrE, pos);
+            else if (b) return selection(rotate(arrE), pos);
+            else if (c) return selection(rotate(rotate(arrE)), pos);
+            else if (d) return selection(rotate(rotate(rotate(arrE))), pos);
+            else if (e) return selection(reverse(arrE), pos);
+            else if (f) return selection(rotate(reverse(arrE)), pos);
+            else if (g) return selection(rotate(rotate(reverse(arrE))), pos);
+            else if (h) return selection(rotate(rotate(rotate(reverse(arrE)))), pos);
+        }else if (s.charAt(0) == 'F'){
+            if (a) return selection(arrF, pos);
+            else if (b) return selection(rotate(arrF), pos);
+            else if (c) return selection(rotate(rotate(arrF)), pos);
+            else if (d) return selection(rotate(rotate(rotate(arrF))), pos);
+            else if (e) return selection(reverse(arrF), pos);
+            else if (f) return selection(rotate(reverse(arrF)), pos);
+            else if (g) return selection(rotate(rotate(reverse(arrF))), pos);
+            else if (h) return selection(rotate(rotate(rotate(reverse(arrF)))), pos);
+        }else if (s.charAt(0) == 'G'){
+            if (a) return selection(arrG, pos);
+            else if (b) return selection(rotate(arrG), pos);
+            else if (c) return selection(rotate(rotate(arrG)), pos);
+            else if (d) return selection(rotate(rotate(rotate(arrG))), pos);
+            else if (e) return selection(reverse(arrG), pos);
+            else if (f) return selection(rotate(reverse(arrG)), pos);
+            else if (g) return selection(rotate(rotate(reverse(arrG))), pos);
+            else if (h) return selection(rotate(rotate(rotate(reverse(arrG)))), pos);
+        }else if (s.charAt(0) == 'H'){
+            if (a) return selection(arrH, pos);
+            else if (b) return selection(rotate(arrH), pos);
+            else if (c) return selection(rotate(rotate(arrH)), pos);
+            else if (d) return selection(rotate(rotate(rotate(arrH))), pos);
+            else if (e) return selection(reverse(arrH), pos);
+            else if (f) return selection(rotate(reverse(arrH)), pos);
+            else if (g) return selection(rotate(rotate(reverse(arrH))), pos);
+            else if (h) return selection(rotate(rotate(rotate(reverse(arrH)))), pos);
+        }
+        return null;
+    }
+
+    static ArrayList<Integer> selection (int[][] a, int[] b){
+        ArrayList<Integer> arr = new ArrayList<>();
+        for (int i = 0; i < 3; i++){
+            for (int j = 0; j < 3; j++){
+                if (a[i][j] == 0){
+                    arr.add(b[3*i+j]);
+                }
+            }
+        }
+        return arr;
+    }
+    
+    static int[][] rotate(int[][] m) {
+        int[][] origin = new int[3][3];
+        int[][] outcome = new int[3][3];
+        origin[0] = m[2];
+        origin[2] = m[0];
+        origin[1] = m[1];
+
+        for (int i = 0; i < 3; i++) {
+            for (int j = 0; j < 3; j++) {
+                outcome[i][j] = origin[j][i];
+            }
+        }
+        return outcome;
+    }
+
+    static int[][] reverse(int[][] m){
+        int[][]outcome = new int[3][3];
+        for (int i = 0; i<3; i++){
+            for (int j =0 ; j<3; j++ ){
+                outcome[i][j]= m[i][2-j];
+            }
+        }
+        return outcome;
+    }
+
 
 /*
     static ArrayList<Integer> getCoordinate(String n){
