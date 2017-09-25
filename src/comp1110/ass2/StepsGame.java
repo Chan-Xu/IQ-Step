@@ -118,7 +118,7 @@ public class StepsGame {
             /* check the rings without overlap */
             ArrayList<Integer> result = new ArrayList<>();
             for (int v = 0; v < place.length; v++){
-                ArrayList<Integer> list = listArray(place[v]);
+                ArrayList<Integer> list = getPosition(place[v]);
                 for (int w = 0; w <list.size(); w++){
                     result.add(list.get(w));
                 }
@@ -187,25 +187,28 @@ public class StepsGame {
         }return  true;
     }
 
-    static ArrayList<Integer> listArray(String s){
+    static ArrayList<Integer> getPosition(String s){
         Map<Character, Integer> list = new HashMap<>();
         char[] position = {'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y',
-                'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y'};
+                            'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y'};
 
         for (int i = 0; i < position.length; i++){
             list.put(position[i],i);
         }
 
         int centre = list.get(s.charAt(2));
-
         int[] pos = {centre-11, centre-10, centre-9,
                       centre-1, centre, centre+1,
                       centre+9, centre+10, centre+11};
 
-        int[][] arrA = {{0, 0, -1},{0, 0, 0}, {0, -1, -1}}; int[][] arrB = {{-1, 0, -1},{-1, 0, 0},{-1, 0, 0}};
-        int[][] arrC = {{-1, 0, -1},{-1, 0, 0},{ 0, 0, -1}}; int[][] arrD = {{-1, 0, -1},{0, 0, -1},{-1, 0, 0}};
-        int[][] arrE = {{-1, 0, -1},{0, 0, -1},{0, 0, -1}}; int[][] arrF = {{-1, -1, 0},{-1, 0, 0},{0, 0, -1}};
-        int[][] arrG = {{-1, 0, 0},{-1, 0, 0},{0, 0, -1}}; int[][] arrH = {{-1, 0, 0}, {0, 0, -1},{-1, 0, 0}};
+        int[][] arrA = {{0, 0, -1},{0, 0, 0}, {0, -1, -1}};
+        int[][] arrB = {{-1, 0, -1},{-1, 0, 0},{-1, 0, 0}};
+        int[][] arrC = {{-1, 0, -1},{-1, 0, 0},{ 0, 0, -1}};
+        int[][] arrD = {{-1, 0, -1},{0, 0, -1},{-1, 0, 0}};
+        int[][] arrE = {{-1, 0, -1},{0, 0, -1},{0, 0, -1}};
+        int[][] arrF = {{-1, -1, 0},{-1, 0, 0},{0, 0, -1}};
+        int[][] arrG = {{-1, 0, 0},{-1, 0, 0},{0, 0, -1}};
+        int[][] arrH = {{-1, 0, 0}, {0, 0, -1},{-1, 0, 0}};
 
         boolean a = s.charAt(1) == 'A';
         boolean b = s.charAt(1) == 'B';
@@ -303,7 +306,7 @@ public class StepsGame {
         }
         return arr;
     }
-    
+
     static int[][] rotate(int[][] m) {
         int[][] origin = new int[3][3];
         int[][] outcome = new int[3][3];
