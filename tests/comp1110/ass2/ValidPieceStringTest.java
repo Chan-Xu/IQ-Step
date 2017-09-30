@@ -4,7 +4,7 @@ import org.junit.Test;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.assertFalse;
 
-
+// should add more tests more general. and messages should better for user.
 public class ValidPieceStringTest {
     @Test
     public void testCorrectString() {
