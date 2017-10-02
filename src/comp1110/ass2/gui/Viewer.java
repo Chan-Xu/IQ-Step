@@ -44,7 +44,7 @@ public class Viewer extends Application {
             if(!(a1>='A'&&a1<='H')){
                 throw new IllegalArgumentException("no this picture");
             }else if (a2=='A'||a2=='E'){
-                setImage(new Image((getClass().getResource("assets/AA.png").toString())));
+                setImage(new Image((getClass().getResource("assets/"+a1+a2+".png").toString())));
             }
             else {           throw new IllegalArgumentException("no this picture");
             }  setFitHeight(PIECE_IMAGE_SIZE);
