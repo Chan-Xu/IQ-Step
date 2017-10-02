@@ -17,4 +17,3 @@ Review Comments:
     The code is not well-documented(for example there are not good commits to explain the function) but the program decomposition is appropriate.
     
     I suspect that there are some errors in the code. The code is not incomplete which cannot implement a basic playable Steps Game in JavaFX.
-3. 
