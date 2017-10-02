@@ -22,9 +22,9 @@ public class StepsGame {
      */
     static boolean isPiecePlacementWellFormed(String piecePlacement) {
         // FIXME Task 2: determine whether a piece placement is well-forme
+        // Authorship details: Task2 is written by Chan Xu (u6233112).
         //Check if it consists of exactly three characters
         if (piecePlacement.length() == 3) {
-
             char[] placementChar = piecePlacement.toCharArray();
             if(placementChar[0] >= 'A' && placementChar[0] <= 'H'){                    //Check the first char
                 if(placementChar[1] >= 'A' && placementChar[1] <= 'H'){                //Check the second char
@@ -47,6 +47,7 @@ public class StepsGame {
      */
     static boolean isPlacementWellFormed(String placement) {
         // FIXME Task 3: determine whether a placement is well-formed
+        // Authorship details: Task3 is written by the group.
         if (placement == null || placement.equals("")) {
             return false;
         } else if (placement.length() % 3 != 0) {
@@ -58,13 +59,9 @@ public class StepsGame {
                 a[i] = placement.substring(3 * i, 3 * i + 3);
                 if (isPiecePlacementWellFormed(a[i])&& NoDuplicate(placement)) {
                     return true;
-
                 }
-
                 }
-
             }
-
         return false;
     }
 
@@ -90,6 +87,7 @@ public class StepsGame {
      */
     static boolean isPlacementSequenceValid(String placement) {
         // FIXME Task 5: determine whether a placement sequence is valid
+        // Authorship details: Task5 is written by Chan Xu (u6233112).
         if (!isPlacementWellFormed(placement)) {
             return false;
         } else {
@@ -390,6 +388,7 @@ public class StepsGame {
      */
     static String[] getSolutions(String placement) {
         // FIXME Task 9: determine all solutions to the game, given a particular starting placement
+        // Authorship details: Task9 is written by Chan Xu (u6233112).
         return null;
     }
 }
