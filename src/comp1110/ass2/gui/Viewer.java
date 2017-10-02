@@ -11,7 +11,11 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
+
+import javax.script.Bindings;
+import java.io.File;
 
 /**
  * A very simple viewer for piece placements in the steps game.
@@ -24,7 +28,7 @@ public class Viewer extends Application {
 
     /* board layout */
     private static final int SQUARE_SIZE = 60;
-    private static final int PIECE_IMAGE_SIZE = (int) ((3*SQUARE_SIZE)*1.33);
+    private static final int PIECE_IMAGE_SIZE = (int) ((3 * SQUARE_SIZE) * 1.33);
     private static final int VIEWER_WIDTH = 750;
     private static final int VIEWER_HEIGHT = 500;
 
@@ -34,32 +38,59 @@ public class Viewer extends Application {
     private final Group controls = new Group();
     TextField textField;
 
+    class Piece extends ImageView{
+        Piece(char a1, char a2){
+//            char[] string =a.toCharArray();
+            if(!(a1>='A'&&a1<='H')){
+                throw new IllegalArgumentException("no this picture");
+            }else if (a2=='A'||a2=='E'){
+                setImage(new Image((getClass().getResource("assets/"+a1+a2+".png").toString())));
+            }
+            else {           throw new IllegalArgumentException("no this picture");
+            }  setFitHeight(PIECE_IMAGE_SIZE);
+            setFitWidth(PIECE_IMAGE_SIZE);
+        }
 
+        Piece(char a1,char a2,char pos){
+            this(a1,a2);
+
+//            if(pos<'A'||pos>'Y'||pos<'a'||pos>'y'){
+//                throw new IllegalArgumentException("not the right postion");
+//            }
+//            int x = 7;
+//            int y = 7;
+          setLayoutX(pos);
+            setLayoutY(pos);
+        }
+    }
     /**
      * Draw a placement in the window, removing any previously drawn one
      *
-     * @param placement  A valid placement string
+     * @param placement A valid placement string
      */
+
     void makePlacement(String placement) {
-        // FIXME Task 4: implement the simple placement viewer
-        Image image = new Image("gui/assets placement");
-        ImageView imageView= new ImageView(image);
-        textField.setOnKeyTyped(event -> {
-        if (event.getCharacter().equals(placement))
-        controls.getChildren().add(imageView);
-    }) ;
+////        // FIXME Task 4: implement the simple placement viewer
+        char[] string= placement.toCharArray();
+         controls.getChildren().add(new Piece(string[0],string[1],string[2]));
+//              StackPane pane = new StackPane();
+//        controls.getChildren().add(imageView);
+//        textField.setOnKeyTyped(event -> {
+//        if (event.getCharacter().equals(placement))
+//        controls.getChildren().add(imageView);
+        }
+
+//
+//
 
 
-    }
+        /**
+         * Create a basic text field for input and a refresh button.
+         */
 
-
-
-    /**
-     * Create a basic text field for input and a refresh button.
-     */
     private void makeControls() {
         Label label1 = new Label("Placement:");
-        textField = new TextField ();
+        textField = new TextField();
         textField.setPrefWidth(300);
         Button button = new Button("Refresh");
         button.setOnAction(new EventHandler<ActionEvent>() {
@@ -67,6 +98,7 @@ public class Viewer extends Application {
             public void handle(ActionEvent e) {
                 makePlacement(textField.getText());
                 textField.clear();
+
             }
         });
         HBox hb = new HBox();
@@ -90,3 +122,6 @@ public class Viewer extends Application {
         primaryStage.show();
     }
 }
+
+
+
