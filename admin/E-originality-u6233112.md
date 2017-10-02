@@ -3,6 +3,8 @@ following documented exceptions:
 
 * The idea of <...> came from a discussion with <...>
 
-* The code in class uses an idea suggested by comp1110.lectures.S03
+* The code in class <GetPositionTest> uses an idea suggested by comp1110.lectures.S03
+
+* The code in class <ValidPieceStringTest> uses an idea suggested by comp1110.lectures.S03
 
 Signed: Chan Xu (u6233112)
