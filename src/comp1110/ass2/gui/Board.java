@@ -9,12 +9,16 @@ import javafx.scene.Group;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.Node;
+
+import java.nio.file.attribute.GroupPrincipal;
+
 public class Board extends Application {
     private static final int BOARD_WIDTH = 933;
     private static final int BOARD_HEIGHT = 700;
     private static final int SQUARE_SIZE = 60;
     private static final int PIECE_IMAGE_SIZE = (int) ((3 * SQUARE_SIZE) * 1.33);
    private Group root =new Group();
+   private Group controls= new Group();
     // FIXME Task 7: Implement a basic playable Steps Game in JavaFX that only allows pieces to be placed in valid places
     // Authorship details: Task7 is written by Yiwen Peng (u6071714).
 
@@ -46,6 +50,7 @@ public class Board extends Application {
             setRotate(90*o);
         }
     }
+    double mouseY,mouseX;
     class moveablePiece extends Piece{
 
         moveablePiece(char a1, char a2) {
@@ -55,6 +60,11 @@ public class Board extends Application {
                 hideCompletion();//hide the completion message
                 rotate();
             });
+            setOnMousePressed(e->{
+                mouseX = e.getSceneX();
+                mouseY = e.getSceneY();
+            });
+
         }
         private void hideCompletion(){
 
