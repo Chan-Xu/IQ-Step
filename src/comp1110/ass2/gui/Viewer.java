@@ -71,7 +71,7 @@ public class Viewer extends Application {
 
     void makePlacement(String placement) {
 ////        // FIXME Task 4: implement the simple placement viewer
-            // Authorship details: Task4 is written by Yiwen Peng (u6071714).
+            // Authorship details: Task4 is written by Yiwen Peng (u6071714);
 
         char[] string= placement.toCharArray();
          controls.getChildren().add(new Piece(string[0],string[1],string[2]));

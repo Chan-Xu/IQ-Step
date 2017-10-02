@@ -20,7 +20,7 @@ public class Board extends Application {
    private Group root =new Group();
    private Group controls= new Group();
     // FIXME Task 7: Implement a basic playable Steps Game in JavaFX that only allows pieces to be placed in valid places
-    // Authorship details: Task7 is written by Yiwen Peng (u6071714).
+    // Authorship details: Task7 is written by Yiwen Peng (u6071714);
 
     class Piece extends ImageView {
         Piece(char a1, char a2){
