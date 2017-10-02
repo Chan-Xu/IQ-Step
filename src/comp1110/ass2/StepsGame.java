@@ -137,15 +137,6 @@ public class StepsGame {
         return true;
     }
 
-/*
-    // convert char to int
-    static int charToInt(char n) {
-        if (n >= 'A' && n <= 'Y'){
-            return (int)n - 64;
-        }else
-            return (int)n - 71;
-    }
-*/
 
     /* add a method to determine whether the pieces are valid when home rings on the edges
      * @param String A piece sequence string
@@ -187,6 +178,17 @@ public class StepsGame {
         }return  true;
     }
 
+
+/*
+    // convert char to int using ASCII
+    static int charToInt(char n) {
+        if (n >= 'A' && n <= 'Y'){
+            return (int)n - 64;
+        }else
+            return (int)n - 71;
+    }
+*/
+
     static ArrayList<Integer> getPosition(String s){
         Map<Character, Integer> list = new HashMap<>();
         char[] position = {'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y',
@@ -201,14 +203,30 @@ public class StepsGame {
                       centre-1, centre, centre+1,
                       centre+9, centre+10, centre+11};
 
-        int[][] arrA = {{0, 0, -1},{0, 0, 0}, {0, -1, -1}};
-        int[][] arrB = {{-1, 0, -1},{-1, 0, 0},{-1, 0, 0}};
-        int[][] arrC = {{-1, 0, -1},{-1, 0, 0},{ 0, 0, -1}};
-        int[][] arrD = {{-1, 0, -1},{0, 0, -1},{-1, 0, 0}};
-        int[][] arrE = {{-1, 0, -1},{0, 0, -1},{0, 0, -1}};
-        int[][] arrF = {{-1, -1, 0},{-1, 0, 0},{0, 0, -1}};
-        int[][] arrG = {{-1, 0, 0},{-1, 0, 0},{0, 0, -1}};
-        int[][] arrH = {{-1, 0, 0}, {0, 0, -1},{-1, 0, 0}};
+        /* Making a grid
+         * -"0" means the ring
+           -"1" means nothing
+        */
+        int[][] arrA = {{0, 0, 1},{0, 0, 0},{0, 1, 1}};
+        int[][] arrB = {{1, 0, 1},{1, 0, 0},{1, 0, 0}};
+        int[][] arrC = {{1, 0, 1},{1, 0, 0},{0, 0, 1}};
+        int[][] arrD = {{1, 0, 1},{0, 0, 1},{1, 0, 0}};
+        int[][] arrE = {{1, 0, 1},{0, 0, 1},{0, 0, 1}};
+        int[][] arrF = {{1, 1, 0},{1, 0, 0},{0, 0, 1}};
+        int[][] arrG = {{1, 0, 0},{1, 0, 0},{0, 0, 1}};
+        int[][] arrH = {{1, 0, 0},{0, 0, 1},{1, 0, 0}};
+
+      /*  int [][]arrAll = {
+                {0, 0, 1},{0, 0, 0},{0, 1, 1},
+                {1, 0, 1},{1, 0, 0},{1, 0, 0},
+                {1, 0, 1},{1, 0, 0},{0, 0, 1},
+                {1, 0, 1},{0, 0, 1},{1, 0, 0},
+                {1, 0, 1},{0, 0, 1},{0, 0, 1},
+                {1, 1, 0},{1, 0, 0},{0, 0, 1},
+                {1, 0, 0},{1, 0, 0},{0, 0, 1},
+                {1, 0, 0},{0, 0, 1},{1, 0, 0}
+        };
+*/
 
         boolean a = s.charAt(1) == 'A';
         boolean b = s.charAt(1) == 'B';
