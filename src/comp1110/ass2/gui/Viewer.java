@@ -44,7 +44,7 @@ public class Viewer extends Application {
             if(!(a1>='A'&&a1<='H')){
                 throw new IllegalArgumentException("no this picture");
             }else if (a2=='A'||a2=='E'){
-                setImage(new Image((getClass().getResource("URI_BASE" + a1+a2 + ".png").toString())));
+                setImage(new Image((getClass().getResource("assets/AA.png").toString())));
             }
             else {           throw new IllegalArgumentException("no this picture");
             }  setFitHeight(PIECE_IMAGE_SIZE);
@@ -54,13 +54,13 @@ public class Viewer extends Application {
         Piece(char a1,char a2,char pos){
             this(a1,a2);
 
-            if(pos<'A'||pos>'Y'||pos<'a'||pos>'y'){
-                throw new IllegalArgumentException("not the right postion");
-            }
-            int x = pos-'A';
-            int y = pos -'A';
-          setLayoutX(x);
-            setLayoutY(y);
+//            if(pos<'A'||pos>'Y'||pos<'a'||pos>'y'){
+//                throw new IllegalArgumentException("not the right postion");
+//            }
+//            int x = 7;
+//            int y = 7;
+          setLayoutX(pos);
+            setLayoutY(pos);
         }
     }
     /**
