@@ -6,6 +6,9 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 import javafx.scene.Group;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Circle;
+import javafx.scene.Node;
 public class Board extends Application {
     private static final int BOARD_WIDTH = 933;
     private static final int BOARD_HEIGHT = 700;
@@ -34,12 +37,36 @@ public class Board extends Application {
             if(pos<'A'||pos>'Y'||pos<'a'||pos>'y'){
                 throw new IllegalArgumentException("not the right postion");
             }
+            // to find the  position and need to fix it
             int x = pos-'A';
             int y = pos -'A';
+            int o= pos;
             setLayoutX(x);
             setLayoutY(y);
+            setRotate(90*o);
         }
     }
+    class moveablePiece extends Piece{
+
+        moveablePiece(char a1, char a2) {
+            super(a1, a2);
+            //enevt handlers
+            setOnScroll(e->{
+                hideCompletion();//hide the completion message
+                rotate();
+            });
+        }
+        private void hideCompletion(){
+
+        }
+        private void rotate() {
+
+            setRotate((getRotate()+90)%360);
+
+        }
+
+    }
+
 
     // FIXME Task 8: Implement starting placements
 
