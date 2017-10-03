@@ -22,6 +22,7 @@ public class Board extends Application {
     // FIXME Task 7: Implement a basic playable Steps Game in JavaFX that only allows pieces to be placed in valid places
     // Authorship details: Task7 is written by Yiwen Peng (u6071714);
 
+
     class Piece extends ImageView {
         Piece(char a1, char a2){
 //            char[] string =a.toCharArray();
@@ -88,8 +89,8 @@ public class Board extends Application {
     public void start(Stage primaryStage) throws Exception {
     primaryStage.setTitle("IQ game");
     Scene scene= new Scene(root,BOARD_WIDTH,BOARD_HEIGHT);
-    ImageView img=new ImageView(new Image(getClass().getResource("assets/AA.png").toString()));
-    root.getChildren().add(img);
+ImageView img=new ImageView(new Image(getClass().getResource("assets/AA.png").toString()));
+root.getChildren().add(img);
     primaryStage.setScene(scene);
     primaryStage.show();
     }

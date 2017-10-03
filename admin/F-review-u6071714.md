@@ -14,4 +14,10 @@ write a new method tojustify.So it may look more clear.
 7.the structure and class is appropriate .
 8.And the name is also good,it is easy to understand which method is used.
 9.And there is commit on it.
-10.
+10.In task 5, it also ueses arraylist,hashset.
+It is more convenient than array.
+Hoewever it also usese the array to represent the array in array.
+11.task2 is good.it is eaay to see. 
+Use char represent the number so it does not use the ascii.
+
+
