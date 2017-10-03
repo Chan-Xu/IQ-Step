@@ -88,7 +88,8 @@ public class Board extends Application {
     public void start(Stage primaryStage) throws Exception {
     primaryStage.setTitle("IQ game");
     Scene scene= new Scene(root,BOARD_WIDTH,BOARD_HEIGHT);
-
+    ImageView img=new ImageView(new Image(getClass().getResource("assets/AA.png").toString()));
+    root.getChildren().add(img);
     primaryStage.setScene(scene);
     primaryStage.show();
     }
