@@ -53,9 +53,12 @@ public class StepsGame {
         // FIXME Task 3: determine whether a placement is well-formed
         // Authorship details: Task3 is written by the group.
 
-        if (placement == null || placement.equals("")) {
+        if (placement == null || placement.equals(""))
+        {
             return false;
         } else if (placement.length() % 3 != 0) {
+            return false;
+        } else if (!isPiecePlacementWellFormed(placement)){
             return false;
         } else {
             String[] a = new String[placement.length() / 3];
