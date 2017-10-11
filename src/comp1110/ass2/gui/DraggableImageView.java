@@ -1,3 +1,5 @@
+
+
 package comp1110.ass2.gui;
 
 import javafx.scene.image.Image;
@@ -7,7 +9,7 @@ import javafx.scene.image.ImageView;
  * Created by lenovo on 2017/10/7.
  */
 public class DraggableImageView extends ImageView {
-     private double mouseX ;
+    private double mouseX ;
     private double mouseY ;
     public DraggableImageView(Image image) {
         super(image);
@@ -25,5 +27,4 @@ public class DraggableImageView extends ImageView {
             event.consume();
         });
     }
-    }
-
+}
