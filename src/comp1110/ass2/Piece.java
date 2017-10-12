@@ -2,8 +2,9 @@ package comp1110.ass2;
 
 public class Piece {
 
-    // '0' means no ring; '1' means the lower ring; '2' means the upper ring.
-    // represent 8 pieces
+    /* '0' means no ring; '1' means the lower ring; '2' means the upper ring.
+        Represent origin 8 pieces.
+    */
     private static final int[][][] pieces = {
        {
             {1, 2, 0},
@@ -40,8 +41,73 @@ public class Piece {
     }
     };
 
+    int[][] shape = new int[3][3];
 
-    Piece(String pieceState) {
+    Piece(String pieceState)
+    {
+        int pieceIndex = pieceState.charAt(0) - 'A';
+        char pieceOrientation = pieceState.charAt(1);
+        for (int i = 0; i < 3; i++)
+        {
+            for (int j = 0; j < 3; j++)
+            {
+                shape[i][j] = pieces[pieceIndex][i][j];
+            }
+        }
+        this.rotateAndFlip(pieceOrientation);
+
+    }
+
+    private void rotateAndFlip(char orientation) {
+        this.flip(orientation).rotate(orientation);
+    }
+
+    private Piece flip(char orientation) {
+        if (orientation > 'D')
+        {
+            for (int[] row: shape)
+            {
+                // c = a
+                // a = b
+                // b = c
+                int tmp = row[0];
+                row[0] = row[2];
+                row[2] = tmp;
+                for (int i = 0; i < 3; i++)
+                {
+                    if (row[i] == 1)
+                    {row[i] = 2;}
+                    else if (row[i] == 2)
+                    {row[i] = 1;}
+                }
+            }
+        }
+        return this;
+    }
+
+    private void rotate(char orientation) {
+        int rotateTimes = (orientation - 'A') % 4;
+        for (int n = 0; n < rotateTimes; n++)
+        {
+            int[][] tmp = new int[3][3];
+            for (int i =0; i < 3; i++)
+            {
+                for (int j = 0; j < 3; j++)
+                {
+                    tmp[2-i][j] = shape[i][j];
+                }
+            }
+            for (int i = 0; i < 3; i++)
+            {
+                for (int j = i; j < 3; j++)
+                {
+                    int swap = tmp[i][j];
+                    tmp[i][j] = tmp[j][i];
+                    tmp[j][i] = swap;
+                }
+            }
+            shape = tmp;
+        }
     }
 }
 
