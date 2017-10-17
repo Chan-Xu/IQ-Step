@@ -66,7 +66,7 @@ public class Board extends Application {
         private double mouseY ;
         public DraggablePiece(char piece,char flip) {
             super(piece,flip);
-
+           setOnScroll(event->rotate());
             setOnMousePressed(event -> {
                 mouseX = event.getSceneX() ;
                 mouseY = event.getSceneY() ;
@@ -92,7 +92,10 @@ public class Board extends Application {
                 }
             });
 // ??? how to change this if click this remove the old one???
-            setOnMouseClicked(event -> root.getChildren().add(new DraggablePiece(this.piece,'E')));
+            setOnMouseClicked(event ->{
+//                root.getChildren().add(new DraggablePiece(this.piece,'E')));
+//                root.getChildren().remove(DraggablePiece(this.piece, `this.flip)));
+            });
         }
         private boolean onBoard(){
             return getLayoutX()>=(START_X-50)&&getLayoutX()<=(START_X+SPACE/2+r+((2*r)+SPACE)*4+r)-20
@@ -111,6 +114,10 @@ public class Board extends Application {
             translateY= (centreY-START_Y+WIDTH/24)/(WIDTH/16);
             setLayoutX((int)translateX*(WIDTH/16)+START_X-Piece_Size/2-r);
             setLayoutY((int)translateY*(WIDTH/16)+START_Y-Piece_Size/2-r);
+        }
+
+        private void rotate(){
+            setRotate((getRotate()+90)%360);
         }
         // to flip the piece
 
@@ -158,10 +165,7 @@ public class Board extends Application {
             Scene scene = new Scene(root, BOARD_WIDTH, BOARD_HEIGHT);
             makeBoard();
             makePiece();
-//                        Circle c =new Circle(80,80,50);
-//            c.setFill(Color.RED);
-//            c.setOnMouseClicked(event -> System.out.println("show"));
-//            root.getChildren().add(c);
+
             primaryStage.setScene(scene);
             primaryStage.show();
         }
