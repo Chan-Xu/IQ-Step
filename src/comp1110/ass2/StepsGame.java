@@ -136,10 +136,49 @@ public class StepsGame {
          */
         static Set<String> getViablePiecePlacements(String placement, String objective) {
             // FIXME Task 6: determine the correct order of piece placements
-            return null;
+            // Authorship details: Task5 is written by Chan Xu (u6233112).
+
+            Set<String> box = new HashSet<>();
+
+            for (int i = 0; i < objective.length(); i+=3)
+            {
+                box.add(objective.substring(i, i+3));
+            }
+            for (int i = 0; i < placement.length(); i+=3)
+            {
+                box.remove(placement.substring(i, i+3));
+            }
+
+            Set<String> viablePieces = new HashSet<>();
+
+            for (String obj: box)
+            {
+                if (isViablePiece(obj, box))
+                {
+                    viablePieces.add(obj);
+                }
+            }
+
+            return viablePieces;
         }
 
-        /**
+    private static boolean isViablePiece(String obj, Set<String> box)
+    {
+        for (String sub: box)
+        {
+            if (!obj.equals(sub))
+            {
+                if (!isPlacementSequenceValid(obj+sub))
+                {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+
+
+    /**
          * Return an array of all unique (unordered) solutions to the game, given a
          * starting placement.   A given unique solution may have more than one than
          * one placement sequence, however, only a single (unordered) solution should

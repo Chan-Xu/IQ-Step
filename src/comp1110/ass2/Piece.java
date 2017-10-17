@@ -5,12 +5,15 @@ public class Piece {
     /* '0' means no ring; '1' means the lower ring; '2' means the upper ring.
         Represent origin 8 pieces.
     */
+
+    public static final int Null = 0, Low = 1, High = 2;
+
     private static final int[][][] pieces = {
-       {
-            {1, 2, 0},
-            {2, 1, 2},
-            {1, 0, 0}
-    }, {
+            {
+                    {1, 2, 0},
+                    {2, 1, 2},
+                    {1, 0, 0}
+            }, {
             {0, 2, 0},
             {0, 1, 2},
             {0, 2, 1}
@@ -67,9 +70,6 @@ public class Piece {
         {
             for (int[] row: shape)
             {
-                // c = a
-                // a = b
-                // b = c
                 int tmp = row[0];
                 row[0] = row[2];
                 row[2] = tmp;
@@ -110,6 +110,3 @@ public class Piece {
         }
     }
 }
-
-
-
