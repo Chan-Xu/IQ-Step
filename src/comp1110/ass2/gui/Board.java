@@ -15,6 +15,7 @@ import javafx.scene.shape.Circle;
 import javafx.scene.Node;
 
 import javax.xml.parsers.SAXParser;
+import java.awt.*;
 import java.nio.file.attribute.GroupPrincipal;
 
 public class Board extends Application {
@@ -44,7 +45,7 @@ public class Board extends Application {
                         this.piece = piece;
                         this.flip = flip;
                     }
-                    else {           throw new IllegalArgumentException("no this picture");
+                    else { throw new IllegalArgumentException("no this picture");
                     }
                     if(flip=='A'){
                         originx=BOARD_WIDTH/8*(piece-'A');
@@ -65,6 +66,7 @@ public class Board extends Application {
         private double mouseY ;
         public DraggablePiece(char piece,char flip) {
             super(piece,flip);
+
             setOnMousePressed(event -> {
                 mouseX = event.getSceneX() ;
                 mouseY = event.getSceneY() ;
@@ -80,13 +82,17 @@ public class Board extends Application {
             });
             setOnMouseReleased(event -> {
                 if(onBoard()){
-//                    if(StepsGame.isPlacementSequenceValid(""+this.piece+this.flip+'A')){
+//                    if((""+this.piece+this.flip).equals("AA")){// CHANGE THIS CONDITION
                         snapToGrid();
+//                    }else{
+//                        snapToHome();
 //                    }
                 }else{
                     snapToHome();
                 }
             });
+// ??? how to change this if click this remove the old one???
+            setOnMouseClicked(event -> root.getChildren().add(new DraggablePiece(this.piece,'E')));
         }
         private boolean onBoard(){
             return getLayoutX()>=(START_X-50)&&getLayoutX()<=(START_X+SPACE/2+r+((2*r)+SPACE)*4+r)-20
@@ -106,8 +112,15 @@ public class Board extends Application {
             setLayoutX((int)translateX*(WIDTH/16)+START_X-Piece_Size/2-r);
             setLayoutY((int)translateY*(WIDTH/16)+START_Y-Piece_Size/2-r);
         }
-    }
+        // to flip the piece
 
+    }
+//    private void flipPiece(){
+//        DraggablePiece a=new DraggablePiece('A','A');
+//        a.setOnMouseClicked(event -> System.out.println("sadasd")
+//               );
+//  root.getChildren().add(a);
+//    }
     private void makeBoard(){
         for (int row =0;row<5;row++){
             for (int col=0;col<5;col++){
@@ -121,13 +134,15 @@ public class Board extends Application {
                 Circle circle = new Circle(x, y, r);
                 circle.setFill(Color.GRAY);
                 root.getChildren().add(circle);
+                // change this root to board
+                // add board to root;
             }
         }
     }
 
     private void makePiece(){
         for (char z = 'A'; z <= 'H'; z++) {
-            root.getChildren().addAll(new DraggablePiece(z,'A'),new DraggablePiece(z,'E'));
+            root.getChildren().add(new DraggablePiece(z,'A'));
 
         }
     }
@@ -143,9 +158,14 @@ public class Board extends Application {
             Scene scene = new Scene(root, BOARD_WIDTH, BOARD_HEIGHT);
             makeBoard();
             makePiece();
+//                        Circle c =new Circle(80,80,50);
+//            c.setFill(Color.RED);
+//            c.setOnMouseClicked(event -> System.out.println("show"));
+//            root.getChildren().add(c);
             primaryStage.setScene(scene);
             primaryStage.show();
         }
+
 public static void main(String[] args){
             launch(args);
 }
