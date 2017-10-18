@@ -26,12 +26,12 @@ public class StepsGame {
         // FIXME Task 2: determine whether a piece placement is well-forme
         // Authorship details: Task2 is written by Chan Xu (u6233112).
 
-        //Check if it consists of exactly three characters
+        /* Determine whether it consists of exactly three characters.*/
         if (piecePlacement.length() == 3) {
             char[] placementChar = piecePlacement.toCharArray();
-            if (placementChar[0] >= 'A' && placementChar[0] <= 'H') {                    //Check the first char
-                if (placementChar[1] >= 'A' && placementChar[1] <= 'H') {                //Check the second char
-                    return ((placementChar[2] >= 'A' && placementChar[2] <= 'Y') ||    //Check the third char
+            if (placementChar[0] >= 'A' && placementChar[0] <= 'H') {                    // Check the first char
+                if (placementChar[1] >= 'A' && placementChar[1] <= 'H') {                // Check the second char
+                    return ((placementChar[2] >= 'A' && placementChar[2] <= 'Y') ||     // Check the third char
                             (placementChar[2] >= 'a' && placementChar[2] <= 'y'));
                 }
             }
@@ -72,7 +72,7 @@ public class StepsGame {
 
 
     /**
-     * Add a method to check whether they are duplicate
+     * Helper for Task 3.
      *
      * @param placement A placement sequence string
      * @return False If the placements are not duplicate
@@ -100,20 +100,23 @@ public class StepsGame {
         // FIXME Task 5: determine whether a placement sequence is valid
         // Authorship details: Task5 is written by Chan Xu (u6233112).
 
+        /* Determine whether the placement is well formed.*/
         if (!isPlacementWellFormed(placement))
         {
             return false;
         } else
         {
+            /* Create a board.*/
             GameBoard brd = new GameBoard();
 
             for (int i = 0; i < placement.length(); i += 3)
             {
-                String pieceState = placement.substring(i, i+2);
-                Piece pce = new Piece(pieceState);
-                char pos = placement.charAt(i+2);
+                String pieceState = placement.substring(i, i+2);        // separate into pieces string
+                Piece pce = new Piece(pieceState);                     // create the piece with its shape information by using number 0,1,2
+                char pos = placement.charAt(i+2);                      // get piece position
 
-                if (!brd.isPlacePiece(pce, pos))
+                /* Determine whether the piece can be placed on the board.*/
+                if (!brd.isPiecePlaced(pce, pos))
                 {
                     return false;
                 }
@@ -136,7 +139,7 @@ public class StepsGame {
          */
         static Set<String> getViablePiecePlacements(String placement, String objective) {
             // FIXME Task 6: determine the correct order of piece placements
-            // Authorship details: Task5 is written by Chan Xu (u6233112).
+            // Authorship details: Task6 is written by Chan Xu (u6233112).
 
             Set<String> box = new HashSet<>();
 
