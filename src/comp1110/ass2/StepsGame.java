@@ -126,45 +126,45 @@ public class StepsGame {
     }
 
 
-        /**
-         * Given a string describing a placement of pieces and a string describing
-         * an (unordered) objective, return a set of all possible next viable
-         * piece placements.   A viable piece placement must be a piece that is
-         * not already placed (ie not in the placement string), and which will not
-         * obstruct any other unplaced piece.
-         *
-         * @param placement A valid sequence of piece placements where each piece placement is drawn from the objective
-         * @param objective A valid game objective, but not necessarily a valid placement string
-         * @return An set of viable piece placements
-         */
-        static Set<String> getViablePiecePlacements(String placement, String objective) {
-            // FIXME Task 6: determine the correct order of piece placements
-            // Authorship details: Task6 is written by Chan Xu (u6233112).
+    /**
+     * Given a string describing a placement of pieces and a string describing
+     * an (unordered) objective, return a set of all possible next viable
+     * piece placements.   A viable piece placement must be a piece that is
+     * not already placed (ie not in the placement string), and which will not
+     * obstruct any other unplaced piece.
+     *
+     * @param placement A valid sequence of piece placements where each piece placement is drawn from the objective
+     * @param objective A valid game objective, but not necessarily a valid placement string
+     * @return An set of viable piece placements
+     */
+    static Set<String> getViablePiecePlacements(String placement, String objective) {
+        // FIXME Task 6: determine the correct order of piece placements
+        // Authorship details: Task6 is written by Chan Xu (u6233112).
 
-            /* Create a box storing objective string which is different from placement string.*/
-            Set<String> box = new HashSet<>();
+        /* Create a box storing objective string which is different from placement string.*/
+        Set<String> box = new HashSet<>();
 
-            for (int i = 0; i < objective.length(); i+=3)
-            {
-                box.add(objective.substring(i, i+3));
-            }
-            for (int i = 0; i < placement.length(); i+=3)
-            {
-                box.remove(placement.substring(i, i+3));
-            }
-
-            /* To get viable pieces.*/
-            Set<String> viablePieces = new HashSet<>();
-
-            for (String obj: box)
-            {
-                if (isViablePiece(obj, box))
-                {
-                    viablePieces.add(obj);
-                }
-            }
-            return viablePieces;
+        for (int i = 0; i < objective.length(); i+=3)
+        {
+            box.add(objective.substring(i, i+3));
         }
+        for (int i = 0; i < placement.length(); i+=3)
+        {
+            box.remove(placement.substring(i, i+3));
+        }
+
+        /* To get viable pieces.*/
+        Set<String> viablePieces = new HashSet<>();
+
+        for (String obj: box)
+        {
+            if (isViablePiece(obj, box))
+            {
+                viablePieces.add(obj);
+            }
+        }
+        return viablePieces;
+    }
 
 
     /**
