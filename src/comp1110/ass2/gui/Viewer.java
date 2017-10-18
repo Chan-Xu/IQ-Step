@@ -36,6 +36,7 @@ public class Viewer extends Application {
 
     private final Group root = new Group();
     private final Group controls = new Group();
+    private final Group piece=new Group();
     TextField textField;
 
     class Piece extends ImageView{
@@ -74,10 +75,8 @@ public class Viewer extends Application {
         // Authorship details: Task4 is written by Yiwen Peng (u6071714);
 
         char[] string = placement.toCharArray();
-        controls.getChildren().add(new Piece(string[0], string[1], string[2]));
-
-        controls.getChildren().removeAll();
-        Button clear = new Button("clear");
+        piece.getChildren().add(new Piece(string[0], string[1], string[2]));
+        controls.getChildren().add(piece);
 
     }
 
@@ -103,14 +102,18 @@ public class Viewer extends Application {
 
             }
         });
-
+        Button clear = new Button("clear");
+        clear.setOnAction(e-> piece.getChildren().clear());
+        clear.setLayoutX(130);
+        clear.setLayoutY(130);
         HBox hb = new HBox();
-        hb.getChildren().addAll(label1, textField, button);
+        hb.getChildren().addAll(label1, textField, button,clear);
         hb.setSpacing(10);
         hb.setLayoutX(130);
         hb.setLayoutY(VIEWER_HEIGHT - 50);
         controls.getChildren().add(hb);
     }
+
 
     @Override
     public void start(Stage primaryStage) throws Exception {
