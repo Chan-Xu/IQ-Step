@@ -141,6 +141,7 @@ public class StepsGame {
             // FIXME Task 6: determine the correct order of piece placements
             // Authorship details: Task6 is written by Chan Xu (u6233112).
 
+            /* Create a box storing objective string which is different from placement string.*/
             Set<String> box = new HashSet<>();
 
             for (int i = 0; i < objective.length(); i+=3)
@@ -152,6 +153,7 @@ public class StepsGame {
                 box.remove(placement.substring(i, i+3));
             }
 
+            /* To get viable pieces.*/
             Set<String> viablePieces = new HashSet<>();
 
             for (String obj: box)
@@ -161,10 +163,16 @@ public class StepsGame {
                     viablePieces.add(obj);
                 }
             }
-
             return viablePieces;
         }
 
+
+    /**
+     * Helper for Task 6.
+     * @param obj
+     * @param box
+     * @return True if A viable piece placement will not obstruct any other unplaced piece.
+     */
     private static boolean isViablePiece(String obj, Set<String> box)
     {
         for (String sub: box)

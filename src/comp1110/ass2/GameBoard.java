@@ -1,7 +1,7 @@
 package comp1110.ass2;
 
 /**
- *  Created by Chan Xu (u6233112)
+ *  Created by Chan Xu (u6233112).
  */
 public class GameBoard {
 
