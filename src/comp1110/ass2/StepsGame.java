@@ -53,11 +53,21 @@ public class StepsGame {
         // FIXME Task 3: determine whether a placement is well-formed
         // Authorship details: Task3 is written by the group.
 
-        for (int i = 0; i < placement.length(); i+=3) {
-            if (!isPiecePlacementWellFormed(placement.substring(i, i + 3))) {
-                return false;
+        /* Determine whether the placement is null.*/
+        if (placement == null)
+        {
+            return false;
+            /* Determine whether the length of placement is divided by three.*/
+        }else if (placement.length() % 3 != 0)
+        {
+            return false;
+        }else
+        {
+            for (int i = 0; i < placement.length(); i += 3) {
+                if (!isPiecePlacementWellFormed(placement.substring(i, i + 3))) {
+                    return false;
+                }
             }
-        }
 
             String[] a = new String[placement.length() / 3];
 
@@ -67,12 +77,14 @@ public class StepsGame {
                     return true;
                 }
             }
-        return false;
+            return false;
+        }
     }
 
 
     /**
      * Helper for Task 3.
+     * The idea is from StackOverflow: https://stackoverflow.com/questions/13119926/find-duplicate-characters-in-a-string-and-count-the-number-of-occurances-using-j
      *
      * @param placement A placement sequence string
      * @return False If the placements are not duplicate
