@@ -5,7 +5,8 @@ import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.control.Button;
-
+import javafx.scene.text.Font;
+import javafx.scene.text.*;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import javafx.scene.Group;
@@ -35,6 +36,7 @@ public class Board extends Application {
     private final Group firstImage= new Group();
     private final Group flipImage =new Group();
     private final Group starPiece=new Group();
+    private final Group instruction=new Group();
     private static final char not=' ';
     //to save the flip and rotation
     char[]flipRot = new char[8];
@@ -44,11 +46,12 @@ public class Board extends Application {
     String[]onBoardPiece=new String[8];
     private static  final String not_string=" ";
     // FIXME Task 7: Implement a basic playable Steps Game in JavaFX that only allows pieces to be placed in valid places
+    //Authorship details: Task7 is written by Yiwen Peng (u6071714).
     // to create a piece class
 
     class Piece extends ImageView{
         int originx,originy;
-        char piece,flip,a,b;
+        char piece,flip;
         int index;
         Piece(char piece, char flip){
             if(!(piece>='A'&&piece<='H')){
@@ -62,7 +65,7 @@ public class Board extends Application {
             else { throw new IllegalArgumentException("no this picture");
             }
                 originx=BOARD_WIDTH/8*(piece-'A');
-                originy=0;
+                originy=3*Piece_Size;
             setFitHeight(Piece_Size);
             setFitWidth(Piece_Size);
             setLayoutX(originx);
@@ -78,10 +81,9 @@ public class Board extends Application {
             flipRot[index]=not;
             pos[index]=not;
             onBoardPiece[index]=not_string;
-            setOnScroll(event->{
-                rotate();
-
-            });
+            // to rotate the picture
+            setOnScroll(event-> rotate());
+            // to move the piece
             setOnMousePressed(event -> {
                 mouseX = event.getSceneX() ;
                 mouseY = event.getSceneY() ;
@@ -95,6 +97,7 @@ public class Board extends Application {
                 mouseY = event.getSceneY() ;
                 event.consume();
             });
+            // to set on the nearst peg
             setOnMouseReleased((MouseEvent event) -> {
                 if(onBoard()){
                     snapToGrid();
@@ -102,6 +105,7 @@ public class Board extends Application {
                 else {
                     snapToHome();
                 }
+
                 if(StepsGame.isPlacementSequenceValid(Board.this.toString(onBoardPiece))){
                     snapToGrid();
                 }else{
@@ -109,6 +113,7 @@ public class Board extends Application {
                 }
                 System.out.println(Board.this.toString(onBoardPiece));
             });
+            // to flip the picture;
             setOnMouseClicked(event ->{
                 int clickTimes = event.getClickCount();
                 if (clickTimes == 2){
@@ -154,12 +159,13 @@ public class Board extends Application {
             getFlipRot();
             total();
         }
-
+        // to flip the picture   find corresponded char
         private void getFlipRot(){
             int rotate=(int)getRotate()/90;
             char val=(char) (flip+rotate);
             flipRot[index]=val;
         }
+        // find the char of the position (A,B...)
         private void setPosition(){
             char position;
             int x= (int)(getLayoutX()+Piece_Size/2-START_X+PieceR/2)/(Space);
@@ -171,6 +177,7 @@ public class Board extends Application {
             }
             pos[index]=position;
         }
+        //get the information string of piece;
         private void total(){
             onBoardPiece[index]=(String.valueOf(piece)+String.valueOf(flipRot[index])+String.valueOf(pos[index]));
         }
@@ -187,7 +194,7 @@ public class Board extends Application {
         String str=valid.toString();
         return  str;
     }
-
+      // draw the peg
     private void makeBoard(){
         for (int row =0;row<5;row++){
             for (int col=0;col<5;col++){
@@ -207,13 +214,16 @@ public class Board extends Application {
             }
         }
     }
-
+     // draw the piece
     private void makePiece(){
         for (char z = 'A'; z <= 'H'; z++) {
             firstImage.getChildren().add(new DraggablePiece(z,'A'));
         }
     }
     // FIXME Task 8: Implement starting placements
+    //Authorship details: Task8 is written Yiwen Peng (u6071714)
+
+    // randomly choose a piece on the board
     private void star(){
         firstImage.getChildren().remove(0,7);
         ArrayList<String> list=new ArrayList<>();
@@ -229,21 +239,71 @@ public class Board extends Application {
         int random=(int)(1+Math.random()*7);
         String str =  list.get(random);
         list.remove(random);
-        for(String a:list){
-            char[] b=a.toCharArray();
-            starPiece.getChildren().add(new DraggablePiece(b[0],b[1]));
+        for(String piece:list){
+            char[] singlePiece=piece.toCharArray();
+            starPiece.getChildren().add(new DraggablePiece(singlePiece[0],singlePiece[1]));
         }
         char[] boardPiece = str.toCharArray();
         DraggablePiece a =new DraggablePiece(boardPiece[0],boardPiece[1]);
-        a.relocate(62,162);
+        a.relocate(262,112);
 
         starPiece.getChildren().add(a);
         makeBoard();
 
     }
-    // to design the game
+    // to design the layout of game
+    // design the game board
     private void design(){
+         Image image = new Image((getClass().getResource(URI_BASE+"bg.jpg").toString()));
+         ImageView bg=new ImageView(image);
+         Text title= new Text("IQ-Step");
+         title.setFont(Font.font("Tahoma",FontWeight.NORMAL, 50));
+         title.setX(BOARD_WIDTH/2-200);
+         title.setY(50);
+         bg.setFitHeight(BOARD_HEIGHT);
+         bg.setFitWidth(BOARD_WIDTH);
+         bg.setX(0);
+         bg.setY(0);
+         bg.setOpacity(0.75f);
+         root.getChildren().addAll(bg,title);
+    }
+    // add start button to start the game;
+    private void makeControl(){
+        Button star=new Button("Star");
+        star.setOnAction(event -> {
+            star();
+        });
+        star.setLayoutX(4.5*Piece_Size);
+        star.setLayoutY(2*Piece_Size);
+        root.getChildren().add(star);
+    }                                        
 
+    // design the rule board
+    private void tellRule(){
+        Image image = new Image((getClass().getResource(URI_BASE+"bg1.jpg").toString()));
+        ImageView bg=new ImageView(image);
+          bg.setFitHeight(BOARD_HEIGHT);
+          bg.setFitWidth(BOARD_WIDTH);
+          bg.setX(0);
+          bg.setY(0);
+          bg.setOpacity(0.75f);
+        Text title =new Text("HOW TO PLAY");
+        title.setX(80);
+        title.setY(50);
+        title.setFont(Font.font("Tahoma",FontWeight.NORMAL, 50));
+        Text r1=new Text("1.click Start to play the game.");
+        r1.setFont(Font.font("Tahoma",FontWeight.NORMAL, 20));
+        r1.setX(30);
+        r1.setY(100);
+        Text r2=new Text("2.one the picture could not move to the board,the game is over.");
+        r2.setX(30);
+        r2.setY(130);
+        r2.setFont(Font.font("Tahoma",FontWeight.NORMAL, 20));
+        Text r3=new Text("scroll the mouse to rotate the piece,double to flip the picture.");
+        r3.setFont(Font.font("Tahoma",FontWeight.NORMAL, 20));
+        r3.setX(30);
+        r3.setY(150);
+        instruction.getChildren().addAll(bg,title,r1,r2,r3);
     }
 
     // FIXME Task 10: Implement hints
@@ -253,27 +313,38 @@ public class Board extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
         primaryStage.setTitle("IQ game");
-        Scene scene = new Scene(root, BOARD_WIDTH, BOARD_HEIGHT);
-
-        root.getChildren().add(peg);
-        root.getChildren().add(firstImage);
-        root.getChildren().add(flipImage);
-        root.getChildren().add(starPiece);
+        Scene scene1 = new Scene(root, BOARD_WIDTH, BOARD_HEIGHT);
+        Scene scene2= new Scene(instruction,BOARD_WIDTH/2+20,BOARD_HEIGHT/2+20);
+        design();
         makeBoard();
         makePiece();
+        tellRule();
         makeControl();
-        primaryStage.setScene(scene);
+        tellRule();
+       // TO SWITCH THE SCENE
+        Button rule=new Button("rule");
+        rule.setLayoutX(4.5*Piece_Size);
+        rule.setLayoutY(2.2*Piece_Size);
+        rule.setOnAction(e->primaryStage.setScene(scene2));
+        Button comeback=new Button("back");
+        comeback.setLayoutX(BOARD_WIDTH/2/4*3);
+        comeback.setLayoutY(BOARD_HEIGHT/2/4*3);
+        comeback.setOnAction(e->primaryStage.setScene(scene1));
+        instruction.getChildren().addAll(comeback);
+        root.getChildren().addAll(peg,firstImage,flipImage,starPiece,rule);
+
+        primaryStage.setScene(scene1);
         primaryStage.show();
     }
-    private void makeControl(){
-        Button star=new Button("Star");
-        star.setOnAction(event -> {
-            star();
-        });
-        star.setLayoutX(WIDTH/2);
-        star.setLayoutY(3*Piece_Size);
-        root.getChildren().add(star);
-    }
+
+
+
+
+
+
+
+
+
 
     public static void main(String[] args){
         launch(args);

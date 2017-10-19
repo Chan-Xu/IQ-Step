@@ -11,11 +11,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
-
-import javax.script.Bindings;
-import java.io.File;
 
 /**
  * A very simple viewer for piece placements in the steps game.
@@ -32,7 +28,7 @@ public class Viewer extends Application {
     private static final int VIEWER_WIDTH = 750;
     private static final int VIEWER_HEIGHT = 500;
 
-    private static final String URI_BASE = "assets/";
+    private static final String URI_BASE = "comp1110/ass2/gui/assets/";
 
     private final Group root = new Group();
     private final Group controls = new Group();
@@ -41,11 +37,10 @@ public class Viewer extends Application {
 
     class Piece extends ImageView{
         Piece(char a1, char a2){
-//            char[] string =a.toCharArray();
             if(!(a1>='A'&&a1<='H')){
                 throw new IllegalArgumentException("no this picture");
             }else if (a2=='A'||a2=='E'){
-                setImage(new Image((getClass().getResource("assets/"+a1+a2+".png").toString())));
+                setImage(new Image((getClass().getResource("comp1110/ass2/gui/assets/" +a1+a2+".png").toString())));
             }
             else {           throw new IllegalArgumentException("no this picture");
             }  setFitHeight(PIECE_IMAGE_SIZE);
@@ -55,12 +50,6 @@ public class Viewer extends Application {
         Piece(char a1,char a2,char pos){
             this(a1,a2);
 
-//            if(pos<'A'||pos>'Y'||pos<'a'||pos>'y'){
-//                throw new IllegalArgumentException("not the right postion");
-//            }
-//            int x = 7;
-//            int y = 7;
-          setLayoutX(pos);
             setLayoutY(pos);
         }
     }
@@ -102,6 +91,7 @@ public class Viewer extends Application {
 
             }
         });
+        // add the button to remove the previous piece;
         Button clear = new Button("clear");
         clear.setOnAction(e-> piece.getChildren().clear());
         clear.setLayoutX(130);

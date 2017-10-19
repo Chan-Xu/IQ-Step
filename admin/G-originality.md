@@ -5,5 +5,9 @@ We declare that the work we have submitted for Stage G of this assignment and al
 * The code in class <StepsGame> the function of noduplication  is based on a solution we found when researching the problem.(URL provided in source code comments)
 
 * The code in class <GameBoard> uses an idea suggested by Yuze Gong(u5640420).
+  
+*  The idea of <fix the piece on to peg> came from a discussion with <Hengrui Wang u6202156>
 
-Signed: Chan Xu (u6233112), Yiwen Peng (u)
+* The code in class <DraggablePiece> uses an idea suggested by the assignment1 Game class
+
+Signed: Chan Xu (u6233112), Yiwen Peng (u6071714)

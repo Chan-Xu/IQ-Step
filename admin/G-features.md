@@ -18,6 +18,7 @@ of our project implements the following features:
 -Using math function to represent the postion instesd of using if to discuss;
 -add background image
 -add the rule to tell how to play it;
+- switch the scene between the rule and the game;
 
 
 
