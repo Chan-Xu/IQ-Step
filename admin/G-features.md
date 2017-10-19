@@ -15,10 +15,10 @@ of our project implements the following features:
 (including shape and orientation).
 - Using axis of coordinates to represent the board.
 - Using for loop to combine pieces and board.
--Using math function to represent the postion instesd of using if to discuss;
--add background image
--add the rule to tell how to play it;
-- switch the scene between the rule and the game;
+- Using math function to represent the position instead of using it to discuss.
+- Add background image.
+- Add the rule bottom to tell how to play it.
+- Switch the scene between the rule screen and the game screen.
 
 
 
