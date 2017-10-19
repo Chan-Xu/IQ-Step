@@ -103,10 +103,10 @@ public class GameBoard {
 
         for (int i = -1; i <= 1; i++) {
             for (int j = -1; j <= 1; j++) {
-                int cell = currentShape[i + 1][j + 1];
+                int cellNumber = currentShape[i + 1][j + 1];
                 int currentX = x + i;
                 int currentY = y + j;
-                if (cell == ringType)
+                if (cellNumber == ringType)
                 {
                     if (    0 <= currentX && currentX <= 4 &&
                             0 <= currentY && currentY <= 9)
@@ -114,7 +114,7 @@ public class GameBoard {
                         if (    board[currentX][currentY] == 0 &&
                                 checkNeighbours(currentX, currentY, ringType))
                         {
-                            board[currentX][currentY] = cell;
+                            board[currentX][currentY] = cellNumber;
                         }else
                         {
                             return false;

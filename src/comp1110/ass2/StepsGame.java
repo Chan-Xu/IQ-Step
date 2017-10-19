@@ -73,6 +73,7 @@ public class StepsGame {
 
     /**
      * Helper for Task 3.
+     * The idea is from StackOverflow: https://stackoverflow.com/questions/13119926/find-duplicate-characters-in-a-string-and-count-the-number-of-occurances-using-j
      *
      * @param placement A placement sequence string
      * @return False If the placements are not duplicate
