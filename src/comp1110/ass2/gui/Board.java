@@ -1,11 +1,13 @@
 package comp1110.ass2.gui;
+import comp1110.ass2.GameBoard;
+import comp1110.ass2.StepsGame;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
 
-
+import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import javafx.scene.Group;
 
@@ -14,6 +16,9 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 
 import java.awt.*;
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+import java.util.Arrays;
 
 
 public class Board extends Application {
@@ -32,10 +37,14 @@ public class Board extends Application {
     private static final String URI_BASE = "assets/";
 
     private final Group root = new Group();
+    private static final char not=' ';
     //to save the flip and rotation
     char[]flipRot = new char[8];
     // save the postion
     char[] pos=new char[8];
+    // create an array to save the onboard piece
+   String[]onBoardPiece=new String[8];
+   private static  final String not_string=" ";
     // FIXME Task 7: Implement a basic playable Steps Game in JavaFX that only allows pieces to be placed in valid places
     // to create a piece class
 
@@ -74,9 +83,12 @@ public class Board extends Application {
 
         public DraggablePiece(char piece,char flip) {
             super(piece,flip);
+            flipRot[index]=not;
+            pos[index]=not;
+            onBoardPiece[index]=not_string;
            setOnScroll(event->{
                rotate();
- System.out.println(""+piece+getFlipRot()+pos[index]);
+
            });
             setOnMousePressed(event -> {
                 mouseX = event.getSceneX() ;
@@ -91,20 +103,23 @@ public class Board extends Application {
                 mouseY = event.getSceneY() ;
                 event.consume();
             });
-            setOnMouseReleased(event -> {
+            setOnMouseReleased((MouseEvent event) -> {
                 if(onBoard()){
                     snapToGrid();
-                    } else if(!(""+piece+flipRot[index]+pos[index]).equals("BBL")){
-                    snapToHome();
-                }
+                    }
                     else {
                     snapToHome();
                 }
-
+                if(StepsGame.isPlacementSequenceValid(Board.this.toString(onBoardPiece))){
+                    snapToGrid();
+                }else{
+                    snapToHome();
+                }
+                System.out.println(Board.this.toString(onBoardPiece));
             });
 // ??? how to change this if click this remove the old one???
             setOnMouseClicked(event ->{
-                System.out.println(""+piece+flip);
+//                System.out.println(""+piece+flip);
 //                root.getChildren().add(new DraggablePiece(this.piece,'E'));
 
 
@@ -115,10 +130,13 @@ public class Board extends Application {
             return getLayoutX()>=(START_X-80)&&getLayoutX()<=(START_X+WIDTH+Space-Piece_Size)
                     &&getLayoutY()>=(START_Y-80)&&getLayoutY()<=(START_Y+(Space*5+r)-Piece_Size);
         }
+
         // nake the piece come back to the original position
         private void snapToHome(){
             setLayoutX(originx);
             setLayoutY(originy);
+            flipRot[index]=not;
+            pos[index]=not;
         }
         // make the piece to the nearst position
         private void snapToGrid(){
@@ -126,24 +144,23 @@ public class Board extends Application {
             double centreX,centreY;
             centreX=getLayoutX()+Piece_Size/2;
             centreY=getLayoutY()+Piece_Size/2;
-            translateX= (centreX-START_X+PieceR/2)/(Space);
-            translateY= (centreY-START_Y+PieceR/2)/(Space);
-            int setCentreX=(int)translateX*(Space);
+            int setCentreX=(int)(centreX-START_X+PieceR/2)/(Space)*(Space);
             int setX=setCentreX+START_X-Piece_Size/2;
-            int setCentreY=(int)translateY*(Space);
+            int setCentreY=(int)(centreY-START_Y+PieceR/2)/(Space)*(Space);
             int setY=setCentreY+START_Y-Piece_Size/2;
             setLayoutX(setX);
             setLayoutY(setY);
-             int x = (setCentreX)/Space;
-             int y = (setCentreY)/Space*10;
-             char position= (char)('A'+x+y);
-             pos[index]=position;
-            System.out.println(""+piece+flipRot[index]+pos[index]);
-
+            setPosition();
+            getFlipRot();
+            total();
         }
+
       // to rotate the picture
         private void rotate(){
             setRotate((getRotate()+90)%360);
+            setPosition();
+            getFlipRot();
+            total();
                     }
         // to flip the piece May be not usrful
 //        private DraggablePiece flipPiece(DraggablePiece a){
@@ -154,15 +171,38 @@ public class Board extends Application {
 //            graphics2D= (img = new DraggablePiece(w,h))
 //                    return;
 //        }
-          private char getFlipRot(){
+
+          private void getFlipRot(){
             int rotate=(int)getRotate()/90;
             char val=(char) (flip+rotate);
-
-           return flipRot[index]=val;
-
+            flipRot[index]=val;
           }
+        private void setPosition(){
+            char position='A';
+            int x= (int)(getLayoutX()+Piece_Size/2-START_X+PieceR/2)/(Space);
+            int y=(int)(getLayoutY()+Piece_Size/2-START_Y+PieceR/2)/(Space)*10;
+            if (x+y<26){
+                position= (char)('A'+x+y);
+            }else{
+                position=(char)('A'+x+y+7);
+            }
+            pos[index]=position;
+        }
+       private void total(){
+            onBoardPiece[index]=(String.valueOf(piece)+String.valueOf(flipRot[index])+String.valueOf(pos[index]));
+       }
+    }
+    public String toString(String[] a){
+        StringBuffer valid =new StringBuffer();
+        for (int i=0;i<a.length;i++){
+            if(a[i].equals(" ")){
 
-
+            }else{
+             valid.append(a[i]);
+            }
+        }
+        String str=valid.toString();
+      return  str;
     }
 //    private void flipPiece(){
 //        DraggablePiece a=new DraggablePiece('A','A');
@@ -170,6 +210,7 @@ public class Board extends Application {
 //               );
 //  root.getChildren().add(a);
 //    }
+
     private void makeBoard(){
         for (int row =0;row<5;row++){
             for (int col=0;col<5;col++){
