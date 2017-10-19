@@ -244,7 +244,7 @@ public class Board extends Application {
     private void makePiece(){
         for (char z = 'A'; z <= 'H'; z++) {
             firstImage.getChildren().add(new DraggablePiece(z,'A'));
-
+            //
         }
     }
     // FIXME Task 8: Implement starting placements
