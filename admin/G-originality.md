@@ -2,8 +2,8 @@ We declare that the work we have submitted for Stage G of this assignment and al
 
 * The idea of using this great framework to make the game run faster came from a discussion with Yuze Gong.
 
-* The code in class 'StepsGame' the function of noduplication  is based on a solution we found when researching the problem.(URL provided in source code comments)
+* The code in class <StepsGame> the function of noduplication  is based on a solution we found when researching the problem.(URL provided in source code comments)
 
-* ... 
+* The code in class <GameBoard> uses an idea suggested by Yuze Gong.
 
 Signed: Chan Xu (u6233112), Yiwen Peng (u)
