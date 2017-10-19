@@ -1,5 +1,4 @@
 package comp1110.ass2.gui;
-import comp1110.ass2.GameBoard;
 import comp1110.ass2.StepsGame;
 import javafx.application.Application;
 import javafx.scene.Scene;
@@ -14,24 +13,17 @@ import javafx.scene.Group;
 
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
-
-import java.awt.*;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.Arrays;
-
 
 public class Board extends Application {
 
-
-    // the canves size
     private static final int BOARD_WIDTH = 1200;
     private static final int BOARD_HEIGHT = 900;
     // Piece
     private static final int Piece_Size=150;
     // the board
-    private static final int START_X=100;
-    private static final int START_Y=200;
+    private static final int START_X=2*Piece_Size;
+    private static final int START_Y=Piece_Size;
     private static final int r =12;
     private static  final int WIDTH = Piece_Size*4;
     private static final int Space=Piece_Size/4;
@@ -69,14 +61,8 @@ public class Board extends Application {
             }
             else { throw new IllegalArgumentException("no this picture");
             }
-//            if(flip=='A'){
                 originx=BOARD_WIDTH/8*(piece-'A');
                 originy=0;
-//            }else{
-//                originx =BOARD_WIDTH/8*(piece-'A');
-//                originy= 500;
-//            }
-
             setFitHeight(Piece_Size);
             setFitWidth(Piece_Size);
             setLayoutX(originx);
@@ -123,15 +109,12 @@ public class Board extends Application {
                 }
                 System.out.println(Board.this.toString(onBoardPiece));
             });
-// ??? how to change this if click this remove the old one???
             setOnMouseClicked(event ->{
                 int clickTimes = event.getClickCount();
                 if (clickTimes == 2){
                     firstImage.getChildren().remove((0));
                     flipImage.getChildren().add(new DraggablePiece(this.piece,'E'));
-
                 }
-
             });
         }
         // to check whether the piece is on board
@@ -140,7 +123,7 @@ public class Board extends Application {
                     &&getLayoutY()>=(START_Y-80)&&getLayoutY()<=(START_Y+(Space*5+r)-Piece_Size);
         }
 
-        // nake the piece come back to the original position
+        // make the piece come back to the original position
         private void snapToHome(){
             setLayoutX(originx);
             setLayoutY(originy);
@@ -149,7 +132,6 @@ public class Board extends Application {
         }
         // make the piece to the nearst position
         private void snapToGrid(){
-            double translateX,translateY;
             double centreX,centreY;
             centreX=getLayoutX()+Piece_Size/2;
             centreY=getLayoutY()+Piece_Size/2;
@@ -172,15 +154,6 @@ public class Board extends Application {
             getFlipRot();
             total();
         }
-        // to flip the piece May be not usrful
-//        private DraggablePiece flipPiece(DraggablePiece a){
-//            Graphics2D graphics2D;
-//            DraggablePiece img;
-//            int w= (int) a.getFitWidth();
-//            int h= (int) a.getFitHeight();
-//            graphics2D= (img = new DraggablePiece(w,h))
-//                    return;
-//        }
 
         private void getFlipRot(){
             int rotate=(int)getRotate()/90;
@@ -188,7 +161,7 @@ public class Board extends Application {
             flipRot[index]=val;
         }
         private void setPosition(){
-            char position='A';
+            char position;
             int x= (int)(getLayoutX()+Piece_Size/2-START_X+PieceR/2)/(Space);
             int y=(int)(getLayoutY()+Piece_Size/2-START_Y+PieceR/2)/(Space)*10;
             if (x+y<26){
@@ -214,12 +187,6 @@ public class Board extends Application {
         String str=valid.toString();
         return  str;
     }
-//    private void flipPiece(){
-//        DraggablePiece a=new DraggablePiece('A','A');
-//        a.setOnMouseClicked(event -> System.out.println("sadasd")
-//               );
-//  root.getChildren().add(a);
-//    }
 
     private void makeBoard(){
         for (int row =0;row<5;row++){
@@ -244,7 +211,6 @@ public class Board extends Application {
     private void makePiece(){
         for (char z = 'A'; z <= 'H'; z++) {
             firstImage.getChildren().add(new DraggablePiece(z,'A'));
-            //
         }
     }
     // FIXME Task 8: Implement starting placements
@@ -275,6 +241,11 @@ public class Board extends Application {
         makeBoard();
 
     }
+    // to design the game
+    private void design(){
+
+    }
+
     // FIXME Task 10: Implement hints
 
     // FIXME Task 11: Generate interesting starting placements
@@ -283,12 +254,12 @@ public class Board extends Application {
     public void start(Stage primaryStage) throws Exception {
         primaryStage.setTitle("IQ game");
         Scene scene = new Scene(root, BOARD_WIDTH, BOARD_HEIGHT);
+
         root.getChildren().add(peg);
         root.getChildren().add(firstImage);
         root.getChildren().add(flipImage);
         root.getChildren().add(starPiece);
         makeBoard();
-
         makePiece();
         makeControl();
         primaryStage.setScene(scene);
