@@ -15,9 +15,9 @@ of our project implements the following features:
 (including shape and orientation).
 - Using axis of coordinates to represent the board.
 - Using for loop to combine pieces and board.
--Using math function to represent the postion instesd of using if to discuss;
--add background image
--add the rule to tell how to play it;
+- Using math function to represent the postion instesd of using it to discuss.
+- Add background image.
+- Add the instruction to tell players how to play it.
 
 
 
