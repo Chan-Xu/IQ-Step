@@ -5,7 +5,7 @@ import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-
+import javafx.scene.control.Button;
 
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
@@ -22,6 +22,8 @@ import java.util.Arrays;
 
 
 public class Board extends Application {
+
+
     // the canves size
     private static final int BOARD_WIDTH = 1200;
     private static final int BOARD_HEIGHT = 900;
@@ -37,14 +39,18 @@ public class Board extends Application {
     private static final String URI_BASE = "assets/";
 
     private final Group root = new Group();
+    private final Group peg= new Group();
+    private final Group firstImage= new Group();
+    private final Group flipImage =new Group();
+    private final Group starPiece=new Group();
     private static final char not=' ';
     //to save the flip and rotation
     char[]flipRot = new char[8];
     // save the postion
     char[] pos=new char[8];
     // create an array to save the onboard piece
-   String[]onBoardPiece=new String[8];
-   private static  final String not_string=" ";
+    String[]onBoardPiece=new String[8];
+    private static  final String not_string=" ";
     // FIXME Task 7: Implement a basic playable Steps Game in JavaFX that only allows pieces to be placed in valid places
     // to create a piece class
 
@@ -52,24 +58,24 @@ public class Board extends Application {
         int originx,originy;
         char piece,flip,a,b;
         int index;
-                Piece(char piece, char flip){
-                    if(!(piece>='A'&&piece<='H')){
-                        throw new IllegalArgumentException("no this picture");
-                    }else if (flip=='A'||flip=='E'){
-                        setImage(new Image((getClass().getResource(URI_BASE+piece+flip+".png").toString())));
-                        this.piece = piece;
-                        this.flip = flip;
-                        index=piece-'A';
-                    }
-                    else { throw new IllegalArgumentException("no this picture");
-                    }
-                    if(flip=='A'){
-                        originx=BOARD_WIDTH/8*(piece-'A');
-                        originy=0;
-            }else{
-                originx =BOARD_WIDTH/8*(piece-'A');
-                originy= 500;
+        Piece(char piece, char flip){
+            if(!(piece>='A'&&piece<='H')){
+                throw new IllegalArgumentException("no this picture");
+            }else if (flip=='A'||flip=='E'){
+                setImage(new Image((getClass().getResource(URI_BASE+piece+flip+".png").toString())));
+                this.piece = piece;
+                this.flip = flip;
+                index=piece-'A';
             }
+            else { throw new IllegalArgumentException("no this picture");
+            }
+//            if(flip=='A'){
+                originx=BOARD_WIDTH/8*(piece-'A');
+                originy=0;
+//            }else{
+//                originx =BOARD_WIDTH/8*(piece-'A');
+//                originy= 500;
+//            }
 
             setFitHeight(Piece_Size);
             setFitWidth(Piece_Size);
@@ -86,10 +92,10 @@ public class Board extends Application {
             flipRot[index]=not;
             pos[index]=not;
             onBoardPiece[index]=not_string;
-           setOnScroll(event->{
-               rotate();
+            setOnScroll(event->{
+                rotate();
 
-           });
+            });
             setOnMousePressed(event -> {
                 mouseX = event.getSceneX() ;
                 mouseY = event.getSceneY() ;
@@ -106,8 +112,8 @@ public class Board extends Application {
             setOnMouseReleased((MouseEvent event) -> {
                 if(onBoard()){
                     snapToGrid();
-                    }
-                    else {
+                }
+                else {
                     snapToHome();
                 }
                 if(StepsGame.isPlacementSequenceValid(Board.this.toString(onBoardPiece))){
@@ -119,9 +125,12 @@ public class Board extends Application {
             });
 // ??? how to change this if click this remove the old one???
             setOnMouseClicked(event ->{
-//                System.out.println(""+piece+flip);
-//                root.getChildren().add(new DraggablePiece(this.piece,'E'));
+                int clickTimes = event.getClickCount();
+                if (clickTimes == 2){
+                    firstImage.getChildren().remove((0));
+                    flipImage.getChildren().add(new DraggablePiece(this.piece,'E'));
 
+                }
 
             });
         }
@@ -153,15 +162,16 @@ public class Board extends Application {
             setPosition();
             getFlipRot();
             total();
+            System.out.println(""+setX+" "+setY);
         }
 
-      // to rotate the picture
+        // to rotate the picture
         private void rotate(){
             setRotate((getRotate()+90)%360);
             setPosition();
             getFlipRot();
             total();
-                    }
+        }
         // to flip the piece May be not usrful
 //        private DraggablePiece flipPiece(DraggablePiece a){
 //            Graphics2D graphics2D;
@@ -172,11 +182,11 @@ public class Board extends Application {
 //                    return;
 //        }
 
-          private void getFlipRot(){
+        private void getFlipRot(){
             int rotate=(int)getRotate()/90;
             char val=(char) (flip+rotate);
             flipRot[index]=val;
-          }
+        }
         private void setPosition(){
             char position='A';
             int x= (int)(getLayoutX()+Piece_Size/2-START_X+PieceR/2)/(Space);
@@ -188,9 +198,9 @@ public class Board extends Application {
             }
             pos[index]=position;
         }
-       private void total(){
+        private void total(){
             onBoardPiece[index]=(String.valueOf(piece)+String.valueOf(flipRot[index])+String.valueOf(pos[index]));
-       }
+        }
     }
     public String toString(String[] a){
         StringBuffer valid =new StringBuffer();
@@ -198,11 +208,11 @@ public class Board extends Application {
             if(a[i].equals(" ")){
 
             }else{
-             valid.append(a[i]);
+                valid.append(a[i]);
             }
         }
         String str=valid.toString();
-      return  str;
+        return  str;
     }
 //    private void flipPiece(){
 //        DraggablePiece a=new DraggablePiece('A','A');
@@ -223,7 +233,8 @@ public class Board extends Application {
                 double y =START_Y+Space*row;
                 Circle circle = new Circle(x, y, r);
                 circle.setFill(Color.GRAY);
-                root.getChildren().add(circle);
+                peg.getChildren().add(circle);
+
                 // change this root to board
                 // add board to root;
             }
@@ -232,29 +243,68 @@ public class Board extends Application {
 
     private void makePiece(){
         for (char z = 'A'; z <= 'H'; z++) {
-            root.getChildren().add(new DraggablePiece(z,'A'));
+            firstImage.getChildren().add(new DraggablePiece(z,'A'));
 
         }
     }
-        // FIXME Task 8: Implement starting placements
+    // FIXME Task 8: Implement starting placements
+    private void star(){
+        firstImage.getChildren().remove(0,7);
+        ArrayList<String> list=new ArrayList<>();
 
-        // FIXME Task 10: Implement hints
-
-        // FIXME Task 11: Generate interesting starting placements
-
-        @Override
-        public void start(Stage primaryStage) throws Exception {
-            primaryStage.setTitle("IQ game");
-            Scene scene = new Scene(root, BOARD_WIDTH, BOARD_HEIGHT);
-            makeBoard();
-            makePiece();
-
-            primaryStage.setScene(scene);
-            primaryStage.show();
+        list.add("AA");
+        list.add("BA");
+        list.add("CA");
+        list.add("DA");
+        list.add("EA");
+        list.add("FA");
+        list.add("GA");
+        list.add("HA");
+        int random=(int)(1+Math.random()*7);
+        String str =  list.get(random);
+        list.remove(random);
+        for(String a:list){
+            char[] b=a.toCharArray();
+            starPiece.getChildren().add(new DraggablePiece(b[0],b[1]));
         }
+        char[] boardPiece = str.toCharArray();
+        DraggablePiece a =new DraggablePiece(boardPiece[0],boardPiece[1]);
+        a.relocate(62,162);
 
-public static void main(String[] args){
-            launch(args);
-}
-}
+        starPiece.getChildren().add(a);
+        makeBoard();
 
+    }
+    // FIXME Task 10: Implement hints
+
+    // FIXME Task 11: Generate interesting starting placements
+
+    @Override
+    public void start(Stage primaryStage) throws Exception {
+        primaryStage.setTitle("IQ game");
+        Scene scene = new Scene(root, BOARD_WIDTH, BOARD_HEIGHT);
+        root.getChildren().add(peg);
+        root.getChildren().add(firstImage);
+        root.getChildren().add(flipImage);
+        root.getChildren().add(starPiece);
+        makeBoard();
+
+        makePiece();
+        makeControl();
+        primaryStage.setScene(scene);
+        primaryStage.show();
+    }
+    private void makeControl(){
+        Button star=new Button("Star");
+        star.setOnAction(event -> {
+            star();
+        });
+        star.setLayoutX(WIDTH/2);
+        star.setLayoutY(3*Piece_Size);
+        root.getChildren().add(star);
+    }
+
+    public static void main(String[] args){
+        launch(args);
+    }
+}
