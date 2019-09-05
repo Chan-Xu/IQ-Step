@@ -2,9 +2,13 @@
 Double-layer Board Game (JavaFX GUI) - ANU@COMP1110 Assignment 2
 
 
-Game Viewer                  |  Game Rule
-:-------------------------:|:-------------------------:
-![game](pics/game.png)  |  ![rule](pics/rule.png)
+Game Viewer                | 
+:-------------------------:|
+![game](pics/game.png)  | 
+
+Game Rule|
+:-------------------------:|
+![rule](pics/rule.png)
 
 
 ## QuickStart
