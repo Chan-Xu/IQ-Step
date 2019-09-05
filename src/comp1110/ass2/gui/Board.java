@@ -19,7 +19,7 @@ import java.util.ArrayList;
 public class Board extends Application {
 
     private static final int BOARD_WIDTH = 1200;
-    private static final int BOARD_HEIGHT = 900;
+    private static final int BOARD_HEIGHT = 700;
     // Piece
     private static final int Piece_Size=150;
     // the board
@@ -258,7 +258,7 @@ public class Board extends Application {
          ImageView bg=new ImageView(image);
          Text title= new Text("IQ-Step");
          title.setFont(Font.font("Tahoma",FontWeight.NORMAL, 50));
-         title.setX(BOARD_WIDTH/2-200);
+         title.setX(400);
          title.setY(50);
          bg.setFitHeight(BOARD_HEIGHT);
          bg.setFitWidth(BOARD_WIDTH);
@@ -288,22 +288,26 @@ public class Board extends Application {
           bg.setY(0);
           bg.setOpacity(0.75f);
         Text title =new Text("HOW TO PLAY");
-        title.setX(80);
-        title.setY(50);
+        title.setX(400);
+        title.setY(100);
         title.setFont(Font.font("Tahoma",FontWeight.NORMAL, 50));
-        Text r1=new Text("1.click Start to play the game.");
+        Text r1=new Text("1. Click 'Start' to play the game.");
         r1.setFont(Font.font("Tahoma",FontWeight.NORMAL, 20));
-        r1.setX(30);
-        r1.setY(100);
-        Text r2=new Text("2.one the picture could not move to the board,the game is over.");
-        r2.setX(30);
-        r2.setY(130);
+        r1.setX(350);
+        r1.setY(150);
+        Text r2=new Text("2. If the piece cannot be moved to the board, the game is over.");
+        r2.setX(350);
+        r2.setY(180);
         r2.setFont(Font.font("Tahoma",FontWeight.NORMAL, 20));
-        Text r3=new Text("scroll the mouse to rotate the piece,double to flip the picture.");
+        Text r3=new Text("3. Mouse scroll -> rotate the piece.");
         r3.setFont(Font.font("Tahoma",FontWeight.NORMAL, 20));
-        r3.setX(30);
-        r3.setY(150);
-        instruction.getChildren().addAll(bg,title,r1,r2,r3);
+        r3.setX(350);
+        r3.setY(210);
+        Text r4=new Text("4. Mouse double click -> flip the piece.");
+        r4.setX(350);
+        r4.setY(240);
+        r4.setFont(Font.font("Tahoma",FontWeight.NORMAL, 20));
+        instruction.getChildren().addAll(bg,title,r1,r2,r3,r4);
     }
 
     // FIXME Task 10: Implement hints
@@ -314,7 +318,7 @@ public class Board extends Application {
     public void start(Stage primaryStage) throws Exception {
         primaryStage.setTitle("IQ game");
         Scene scene1 = new Scene(root, BOARD_WIDTH, BOARD_HEIGHT);
-        Scene scene2= new Scene(instruction,BOARD_WIDTH/2+20,BOARD_HEIGHT/2+20);
+        Scene scene2= new Scene(instruction,BOARD_WIDTH,BOARD_HEIGHT);
         design();
         makeBoard();
         makePiece();
@@ -327,7 +331,7 @@ public class Board extends Application {
         rule.setLayoutY(2.2*Piece_Size);
         rule.setOnAction(e->primaryStage.setScene(scene2));
         Button comeback=new Button("back");
-        comeback.setLayoutX(BOARD_WIDTH/2/4*3);
+        comeback.setLayoutX(BOARD_WIDTH/2+100);
         comeback.setLayoutY(BOARD_HEIGHT/2/4*3);
         comeback.setOnAction(e->primaryStage.setScene(scene1));
         instruction.getChildren().addAll(comeback);
