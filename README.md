@@ -2,8 +2,6 @@
 Double-layer Board Game (JavaFX GUI) - ANU@COMP1110 Assignment 2
 
 
-## Sample GUI
-
 Game Viewer                  |  Game Rule
 :-------------------------:|:-------------------------:
 ![game](pics/game.png)  |  ![rule](pics/rule.png)
