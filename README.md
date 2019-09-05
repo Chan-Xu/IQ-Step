@@ -12,12 +12,12 @@ Game Rule|
 
 
 ## QuickStart
-Download and run [game.jar](https://github.com/Chan-Xu/IQ-Step_boardGame/blob/master/game.jar)
+Download and run [game.jar](game.jar)
 
 
 ## Instruction of this assignment
-Here are more details: [Instruction](https://github.com/Chan-Xu/IQ-Step_boardGame/blob/master/Instruction.md)
+Here are more details: [Instruction](instruction.md)
 
 
 ## Presentation
-The [slide](https://github.com/Chan-Xu/IQ-Step_boardGame/blob/master/presentation.pdf) for presentation shows the framework and implementation of this IQ-steps board game.
+The [slide](presentation.pdf) for presentation shows the framework and implementation of this IQ-steps board game.
