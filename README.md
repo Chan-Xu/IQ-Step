@@ -1,4 +1,4 @@
-# IQ-Step
+# IQ-steps_boardGame
 Double-layer Board Game (JavaFX GUI) - ANU@COMP1110 Assignment 2
 
 
@@ -18,4 +18,4 @@ Here are more details: [Instruction](https://github.com/Chan-Xu/IQ-Step_boardGam
 
 
 ## Presentation
-The [Slide](https://github.com/Chan-Xu/IQ-Step_boardGame/blob/master/presentation.pdf) for presentation shows the framework and implementation of this IQ-steps board game.
+The [slide](https://github.com/Chan-Xu/IQ-Step_boardGame/blob/master/presentation.pdf) for presentation shows the framework and implementation of this IQ-steps board game.
