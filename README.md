@@ -1,6 +1,7 @@
 # IQ-Step
 Double-layer Board Game (JavaFX GUI) - ANU@COMP1110 Assignment 2
 
+
 ## Sample GUI
 
 Game Viewer                  |  Game Rule
@@ -9,7 +10,7 @@ Game Viewer                  |  Game Rule
 
 
 ## QuickStart
-Run [game.jar](https://github.com/Chan-Xu/IQ-Step_boardGame/blob/master/game.jar)
+Download and run [game.jar](https://github.com/Chan-Xu/IQ-Step_boardGame/blob/master/game.jar)
 
 
 ## Instruction of this assignment
@@ -17,4 +18,4 @@ Here are more details: [Instruction](https://github.com/Chan-Xu/IQ-Step_boardGam
 
 
 ## Presentation
-[Slides for Presentation](https://github.com/Chan-Xu/IQ-Step_boardGame/blob/master/presentation.pdf)
+The [Slide](https://github.com/Chan-Xu/IQ-Step_boardGame/blob/master/presentation.pdf) for presentation shows the framework and implementation of this IQ-steps board game.
